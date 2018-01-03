@@ -43,10 +43,8 @@ public class Reader {
     public String getValue(String sheetName, String line, int column){
         Sheet sheet = workbook.getSheet(sheetName);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(line);
-        sb.append(column);
-        String cellAdress = sb.toString();
+        String cellAdress = line +
+                            column;
 
         CellReference cellReference = new CellReference(cellAdress);
         Row row = sheet.getRow(cellReference.getRow());
@@ -85,10 +83,8 @@ public class Reader {
     public String getValue(int sheetIndex, String line, int column){
         Sheet sheet = workbook.getSheetAt(sheetIndex);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(line);
-        sb.append(column);
-        String cellAdress = sb.toString();
+        String cellAdress = line +
+                            column;
 
         CellReference cellReference = new CellReference(cellAdress);
         Row row = sheet.getRow(cellReference.getRow());
