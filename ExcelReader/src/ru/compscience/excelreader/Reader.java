@@ -7,14 +7,14 @@ import org.apache.poi.ss.util.CellReference;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Reader {
+
+    private static final int PRINT_MODE_LINE = 0;
+    private static final int PRINT_MODE_COLUMN = 1;
 
     private Workbook workbook;
 
@@ -90,9 +90,40 @@ public class Reader {
             indPull.add(pair);
         }
 
-
         log.log(Level.INFO,"Reader successfully created");
+    }
 
+    public void printTableArgs(){
+        for(int i = 0; i < workbook.getNumberOfSheets(); ++i) {
+
+            System.out.println("--------------------------- " + i + " SHEET -----------------------------");
+
+            Iterator it = indPull.get(i).second.entrySet().iterator();
+            printCollection(it, PRINT_MODE_LINE);
+
+            System.out.println();
+
+            it = indPull.get(i).first.entrySet().iterator();
+            printCollection(it, PRINT_MODE_COLUMN);
+
+            System.out.println("--------------------------- " + i + " SHEET -----------------------------");
+
+        }
+    }
+    private void printCollection(Iterator it, int mode){
+        if(mode == PRINT_MODE_LINE)
+            System.out.print("| ");
+        else
+            System.out.println(" - ");
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+
+            if(mode == PRINT_MODE_LINE){
+                System.out.print(entry.getKey() + " : " + entry.getValue() + " | ");
+            }else {
+                System.out.println(entry.getKey() + " : " + entry.getValue() + "\n - ");
+            }
+        }
     }
 
     public String getValue(String sheetName, String line, int column){
