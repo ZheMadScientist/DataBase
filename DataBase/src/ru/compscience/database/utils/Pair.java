@@ -1,4 +1,4 @@
-package ru.compscience.database;
+package ru.compscience.database.utils;
 
 public class Pair <A, B> {
     protected A question;

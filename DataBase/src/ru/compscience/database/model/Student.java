@@ -1,6 +1,6 @@
 package ru.compscience.database.model;
 
-import ru.compscience.database.Pair;
+import ru.compscience.database.utils.Pair;
 
 import java.util.List;
 
