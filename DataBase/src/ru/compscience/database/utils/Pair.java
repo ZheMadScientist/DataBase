@@ -1,12 +1,12 @@
 package ru.compscience.database.utils;
 
-public class Pair <A, B> {
-    protected A question;
-    protected B answer;
+public class Pair<A, B> {
+    protected A first;
+    protected B second;
 
-    public Pair(A question, B answer) {
+    public Pair(A first, B second) {
         super();
-        this.question = question;
-        this.answer = answer;
+        this.first = first;
+        this.second = second;
     }
 }

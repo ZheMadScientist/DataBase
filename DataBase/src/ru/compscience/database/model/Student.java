@@ -1,6 +1,6 @@
 package ru.compscience.database.model;
 
-import ru.compscience.database.utils.Pair;
+import ru.compscience.database.utils.QAPair;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class Student {
         this.group = group;
     }
 
-    public List< Pair <Question, Answer> > history;
+    public List<QAPair<Question, Answer>> history;
 
     public boolean getTaskResult(Question question, Answer answer){
         return false;
