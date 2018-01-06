@@ -1,4 +1,4 @@
-package ru.compscience.database.utils;
+package utils;
 
 import java.sql.*;
 import java.util.ArrayList;

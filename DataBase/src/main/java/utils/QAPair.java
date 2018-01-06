@@ -1,4 +1,4 @@
-package ru.compscience.database.utils;
+package utils;
 
 public class QAPair<Q, A> {
     protected Q question;

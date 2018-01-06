@@ -1,4 +1,4 @@
-package ru.compscience.database.utils;
+package utils;
 
 public class Pair<A, B> {
     protected A first;
