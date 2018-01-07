@@ -26,7 +26,7 @@ public class Student {
     private String group;
 
 
-    public List<QAPair<Question, Answer>> history;
+    public List <QAPair <Question, Answer> > history;
 
     public boolean getTaskResult(Question question, Answer answer){
         return false;
