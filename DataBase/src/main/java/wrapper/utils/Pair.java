@@ -1,4 +1,4 @@
-package utils;
+package wrapper.utils;
 
 public class Pair<A, B> {
     protected A first;

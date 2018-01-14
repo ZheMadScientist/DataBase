@@ -1,4 +1,4 @@
-package utils;
+package wrapper.utils;
 
 public class QAPair<Q, A> {
     protected Q question;

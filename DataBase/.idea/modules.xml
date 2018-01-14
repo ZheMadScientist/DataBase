@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataBase.iml" filepath="$PROJECT_DIR$/.idea/modules/DataBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataBase_main.iml" filepath="$PROJECT_DIR$/.idea/modules/DataBase_main.iml" group="DataBase" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataBase_test.iml" filepath="$PROJECT_DIR$/.idea/modules/DataBase_test.iml" group="DataBase" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
     </modules>
   </component>

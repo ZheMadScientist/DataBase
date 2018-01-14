@@ -1,4 +1,4 @@
-package model.module;
+package wrapper.model.module;
 
 import java.net.URL;
 import java.util.Date;

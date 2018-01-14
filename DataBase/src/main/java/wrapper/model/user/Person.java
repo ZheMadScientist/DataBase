@@ -1,4 +1,4 @@
-package model.user;
+package wrapper.model.user;
 
 public class Person {
     long id;

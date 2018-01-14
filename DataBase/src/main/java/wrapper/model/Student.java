@@ -1,6 +1,6 @@
-package model;
+package wrapper.model;
 
-import  utils.QAPair;
+import  wrapper.utils.QAPair;
 
 import java.util.List;
 
