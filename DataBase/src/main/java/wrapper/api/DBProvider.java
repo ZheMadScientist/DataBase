@@ -15,5 +15,5 @@ public class DBProvider {
     public Item getItem(){
         return restTemplate.getForObject(URI, Item.class);
     }
-    
+
 }

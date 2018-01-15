@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+  <title>Sample</title>
+  <meta charset="utf-8">
+
+</head>
+
+<body>
+
+  <script  type="text/javascript">
+  function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+
+      // Check if the XMLHttpRequest object has a "withCredentials" property.
+      // "withCredentials" only exists on XMLHTTPRequest2 objects.
+      xhr.open(method, url, true);
+
+    } else if (typeof XDomainRequest != "undefined") {
+
+      // Otherwise, check if XDomainRequest.
+      // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+
+    } else {
+
+      // Otherwise, CORS is not supported by the browser.
+      xhr = null;
+
+    }
+    return xhr;
+  }
+
+
+  class DBProvider {
+    constructor(uri) {
+      this.url = uri;
+    }
+    getItem() {
+      var xmlHttp = createCORSRequest("GET", this.url);
+      //xmlHttp.open( "GET", this.url, true );
+      xmlHttp.send();
+      //return xmlHttp.responseText;
+
+      xmlHttp.onreadystatechange = function() { // (3)
+    if (xmlHttp.readyState != 4) return;
+
+    if (xmlHttp.status != 200) {
+      alert(xmlHttp.status + ': ' + xmlHttp.statusText);
+    } else {
+      alert(xmlHttp.responseText);
+    }
+
+  }
+    }
+
+
+  }
+
+    window.onload = onCreate;
+
+    function onCreate() {
+      let provider = new DBProvider("http://localhost:8080/item-assessconfig");
+      var res = provider.getItem();
+      //alert(new DBProvider("http://localhost:8080/item").getItem());
+      alert(res);
+    }
+  </script>
+
+</body>
+
+</html>
