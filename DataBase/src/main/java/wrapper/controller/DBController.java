@@ -1,4 +1,4 @@
-package wrapper.api;
+package wrapper.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

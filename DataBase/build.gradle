@@ -27,8 +27,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
 
-    compile group: 'javax.persistence', name: 'persistence-wrapper.api', version: '1.0.2'
-    compile group: 'javax.validation', name: 'validation-wrapper.api', version: '2.0.1.Final'
+    compile group: 'javax.persistence', name: 'persistence-wrapper.controller', version: '1.0.2'
+    compile group: 'javax.validation', name: 'validation-wrapper.controller', version: '2.0.1.Final'
 
     compile('org.liquibase:liquibase-core')
 

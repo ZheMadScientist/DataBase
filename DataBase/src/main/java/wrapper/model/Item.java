@@ -13,7 +13,9 @@ public class Item {
 
     public String name;
 
-    public  Item(String s){
+    public Item(){}
+
+    public Item(String s){
         name = s;
         try{
             id = Integer.parseInt(s);
