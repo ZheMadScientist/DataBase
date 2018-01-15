@@ -1,6 +1,6 @@
 package wrapper.model.user;
 
-public class StudentGroup {
+public class StudentsGroup {
     long id;
 
     String name;
