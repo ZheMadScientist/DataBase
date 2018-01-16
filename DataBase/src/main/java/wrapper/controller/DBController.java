@@ -12,15 +12,15 @@ public class DBController {
 
 
     @RequestMapping("/item")
-    public Item item(@RequestParam(value="id", required = false, defaultValue = "1") String id) {
+    public Item item(@RequestParam(value="name", required = false, defaultValue = "1") String name) {
         System.out.println("--------------------GetItem------------------");
-        return new Item(id);
+        return new Item(name);
     }
 
     @CrossOrigin
     @RequestMapping("/item-assessconfig")
-    public Item itemWithAllowedOrigin(@RequestParam(value="id", required = false, defaultValue = "1") String id) {
+    public Item itemWithAllowedOrigin(@RequestParam(value="name", required = false, defaultValue = "1") String name) {
         System.out.println("==== in alternate GET ====");
-        return new Item(id);
+        return new Item(name);
     }
 }
