@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import wrapper.api.DBProvider;
-import wrapper.model.Item;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class , HibernateJpaAutoConfiguration.class})
@@ -24,8 +23,8 @@ public class Main {
 
         final String uri = "http://localhost:8080/item";
 
-        Item item = new DBProvider(uri).getItem();
-        System.out.println(item.id + " " + item.name);
+        //Item item = new DBProvider(uri).getItem();
+        //System.out.println(item.id + " " + item.name);
     }
 
     /*@Bean

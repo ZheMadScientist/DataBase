@@ -1,7 +1,6 @@
 package wrapper.api;
 
 import org.springframework.web.client.RestTemplate;
-import wrapper.model.Item;
 
 public class DBProvider {
     RestTemplate restTemplate;
@@ -12,8 +11,8 @@ public class DBProvider {
         URI = uri;
     }
 
-    public Item getItem(){
+    /*public Item getItem(){
         return restTemplate.getForObject(URI, Item.class);
-    }
+    }*/
 
 }

@@ -5,22 +5,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wrapper.model.Item;
+import wrapper.model.enums.ContentType;
+import wrapper.model.enums.MaterialType;
+import wrapper.model.storage.Material;
+import wrapper.model.storage.content.ContentURL;
 
 @RestController
 public class DBController {
 
-
-    @RequestMapping("/item")
-    public Item item(@RequestParam(value="name", required = false, defaultValue = "1") String name) {
-        System.out.println("--------------------GetItem------------------");
-        return new Item(name);
-    }
-
     @CrossOrigin
-    @RequestMapping("/item-assessconfig")
-    public Item itemWithAllowedOrigin(@RequestParam(value="name", required = false, defaultValue = "1") String name) {
-        System.out.println("==== in alternate GET ====");
-        return new Item(name);
+    @RequestMapping("/material")
+    public Material itemWithAllowedOrigin(@RequestParam(value="name", required = false, defaultValue = "1") String name) {
+        return new Material(MaterialType.URL, name, "", new ContentURL(ContentType.URL));
     }
 }
