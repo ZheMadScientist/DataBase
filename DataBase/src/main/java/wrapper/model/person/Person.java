@@ -15,6 +15,8 @@ public class Person {
 
     String lastName;
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,5 +30,21 @@ public class Person {
 
     public PersonType getPersonType() {
         return personType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public long getId() {
+        return id;
     }
 }

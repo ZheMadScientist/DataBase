@@ -12,6 +12,11 @@ public class GuidGenerator {
     Entity entity;
     LocalDate date;
 
+    public GuidGenerator(){
+        storage = new GuidStorage();
+        date = LocalDate.now();
+    }
+
     public GuidGenerator(Entity entity){
         storage = new GuidStorage();
         this.entity = entity;
@@ -33,8 +38,10 @@ public class GuidGenerator {
 
     long generateNext(){
         Random r = new Random();
-        if(entity.entityType == EntityType.Material){
-            return Long.parseLong("909" + r.nextInt() + date.getDayOfMonth() + date.getMonth() + date.getYear());
+        if(entity != null) {
+            if (entity.entityType == EntityType.Material) {
+                return Long.parseLong("909" + r.nextInt() + date.getDayOfMonth() + date.getMonth() + date.getYear());
+            }
         }
         return r.nextLong();
     }
