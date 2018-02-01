@@ -58,4 +58,8 @@ public class Entity {
         if(replacedBy == GUID)
             isReplaced = false;
     }
+
+    public long getReplacedBy() {
+        return replacedBy;
+    }
 }
