@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Person {
+public class User {
     PersonType personType;
 
     String name;
@@ -21,7 +21,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Person(PersonType personType, String name, String midName, String lastName){
+    public User(PersonType personType, String name, String midName, String lastName){
         this.personType = personType;
         this.name = name;
         this.middleName = midName;

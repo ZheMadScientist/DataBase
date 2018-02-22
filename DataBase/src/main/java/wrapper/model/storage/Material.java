@@ -3,7 +3,6 @@ package wrapper.model.storage;
 import lombok.Data;
 import wrapper.model.enums.EntityType;
 import wrapper.model.enums.MaterialType;
-import wrapper.model.storage.content.Content;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -3,7 +3,7 @@ package wrapper.model.thesaurus;
 import lombok.Data;
 import wrapper.model.enums.thesaurus.StatusOfApproval;
 import wrapper.model.enums.thesaurus.StatusOfVisibility;
-import wrapper.model.person.Person;
+import wrapper.model.person.User;
 import wrapper.utils.GuidGenerator;
 
 import javax.persistence.Id;
@@ -39,7 +39,7 @@ public class Entity {
 
     public Collection<Relation> relations;
 
-    public Entity(Person creator) {
+    public Entity(User creator) {
         GUID = new GuidGenerator().issueNewGUID();
         creatorId = creator.getId();
         creationDate = LocalDate.now();

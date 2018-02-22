@@ -1,4 +1,4 @@
-package wrapper.model.storage.content;
+package wrapper.model.storage;
 
 import lombok.Data;
 import wrapper.model.Entity;
