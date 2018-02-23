@@ -1,32 +1,31 @@
-package wrapper.model.person.userUnit;
+package wrapper.model.user.userUnit;
 
 import lombok.Data;
 import wrapper.model.Entity;
 import wrapper.model.course.Course;
-import wrapper.model.enums.EntityType;
-import wrapper.model.person.User;
+import wrapper.model.user.User;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Data
 @javax.persistence.Entity
 public class Group extends Entity {
 
-    String groupName;
 
-    @Id
+
+    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long groupID;
 
+    @Basic
+    String groupName;
+
     //TODO: replace with collection of hLinks
+    @ManyToOne
     Collection<User> students;
 
+    @OneToMany
     Collection<Course> courses;
 
-    public Group() {
-        super(EntityType.Group);
-    }
 }

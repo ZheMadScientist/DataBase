@@ -2,12 +2,12 @@ package wrapper.model.storage;
 
 import lombok.Data;
 import wrapper.model.Entity;
-import wrapper.model.enums.ContentType;
-import wrapper.model.enums.EntityType;
 
+import javax.persistence.Basic;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.swing.text.html.HTMLDocument;
 
 @Data
 public class Content extends Entity {
@@ -15,7 +15,6 @@ public class Content extends Entity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Content(ContentType contentType) {
-        super(EntityType.Content);
-    }
+    @Basic
+    public HTMLDocument content;
 }

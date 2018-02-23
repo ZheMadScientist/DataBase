@@ -1,7 +1,6 @@
 package wrapper.utils;
 
 import wrapper.model.Entity;
-import wrapper.model.enums.EntityType;
 import wrapper.model.storage.AIDS.GuidStorage;
 
 import java.time.LocalDate;
@@ -39,9 +38,7 @@ public class GuidGenerator {
     long generateNext(){
         Random r = new Random();
         if(entity != null) {
-            if (entity.entityType == EntityType.Material) {
-                return Long.parseLong("909" + r.nextInt() + date.getDayOfMonth() + date.getMonth() + date.getYear());
-            }
+            return Long.parseLong("" + r.nextInt() + date.getDayOfMonth() + date.getMonth() + date.getYear());
         }
         return r.nextLong();
     }

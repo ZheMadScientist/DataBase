@@ -3,7 +3,7 @@ package wrapper.model.thesaurus;
 import lombok.Data;
 import wrapper.model.enums.thesaurus.StatusOfApproval;
 import wrapper.model.enums.thesaurus.StatusOfVisibility;
-import wrapper.model.person.User;
+import wrapper.model.user.User;
 import wrapper.utils.GuidGenerator;
 
 import javax.persistence.Id;
@@ -41,7 +41,7 @@ public class Entity {
 
     public Entity(User creator) {
         GUID = new GuidGenerator().issueNewGUID();
-        creatorId = creator.getId();
+        creatorId = creator.GUID;
         creationDate = LocalDate.now();
 
         visibility = StatusOfVisibility.NOT_INITIALIZED;

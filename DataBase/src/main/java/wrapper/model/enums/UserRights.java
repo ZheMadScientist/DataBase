@@ -1,5 +1,5 @@
 package wrapper.model.enums;
 
-public enum PersonType {
+public enum UserRights {
     Moderator, Teacher, Student
 }

@@ -1,35 +1,24 @@
 package wrapper.model.storage;
 
 import lombok.Data;
-import wrapper.model.enums.EntityType;
-import wrapper.model.enums.MaterialType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Material extends wrapper.model.Entity{
-    public final MaterialType materialType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Basic
     public String description;
 
+    @Basic
     public String name;
 
+    @Basic
     public Content content;
-
-    public Material(MaterialType materialType, String name, String description, Content content) {
-        super(EntityType.Material);
-        this.materialType = materialType;
-        this.name = name;
-        this.description = description;
-        this.content = content;
-    }
 
 }
