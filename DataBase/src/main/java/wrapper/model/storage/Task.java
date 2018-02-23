@@ -9,9 +9,6 @@ import javax.persistence.*;
 @javax.persistence.Entity
 public class Task extends Entity {
 
-    @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private long taskID;
 
     @Basic
     String content;

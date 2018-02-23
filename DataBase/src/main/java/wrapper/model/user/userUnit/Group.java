@@ -12,20 +12,18 @@ import java.util.Collection;
 @javax.persistence.Entity
 public class Group extends Entity {
 
-
-
-    @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long groupID;
+    private long id;
 
     @Basic
     String groupName;
 
+    /*
     //TODO: replace with collection of hLinks
     @ManyToOne
     Collection<User> students;
 
     @OneToMany
     Collection<Course> courses;
+    */
 
 }

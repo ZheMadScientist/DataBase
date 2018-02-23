@@ -9,10 +9,6 @@ import javax.persistence.*;
 @Entity
 public class User extends wrapper.model.Entity {
 
-    @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @Basic
     String name;
 

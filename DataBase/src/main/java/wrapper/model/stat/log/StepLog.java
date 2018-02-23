@@ -2,6 +2,7 @@ package wrapper.model.stat.log;
 
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class StepLog {
 
-    @EmbeddedId
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long stepLogID;
 

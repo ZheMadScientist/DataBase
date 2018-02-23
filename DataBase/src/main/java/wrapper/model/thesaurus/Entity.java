@@ -31,13 +31,13 @@ public class Entity {
 
     public String name;
 
-    public Collection<String> synonyms;
+    //public Collection<String> synonyms;
 
     public String sense;
 
     public String comments;
 
-    public Collection<Relation> relations;
+    //public Collection<Relation> relations;
 
     public Entity(User creator) {
         GUID = new GuidGenerator().issueNewGUID();

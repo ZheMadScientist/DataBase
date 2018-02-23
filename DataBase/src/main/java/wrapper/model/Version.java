@@ -1,6 +1,8 @@
 package wrapper.model;
 
 import lombok.Data;
+import org.hibernate.annotations.RowId;
+import org.springframework.data.annotation.Id;
 import wrapper.model.descriptors.VersionDescription;
 
 import javax.persistence.*;
@@ -8,7 +10,6 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Entity
 public class Version {
 
     @Id
