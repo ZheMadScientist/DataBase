@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class User extends wrapper.model.Entity {
+public class Person extends wrapper.model.Entity {
 
     @Basic
     String name;

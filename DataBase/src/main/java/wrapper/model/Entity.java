@@ -6,7 +6,7 @@ import wrapper.utils.GuidGenerator;
 import javax.persistence.*;
 
 @Data
-@javax.persistence.Entity
+@MappedSuperclass
 public class Entity extends Version {
 
     @Id
