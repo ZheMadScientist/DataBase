@@ -7,9 +7,6 @@ import wrapper.model.storage.Material;
 import wrapper.model.storage.Task;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.UUID;
 
 @Data
 @javax.persistence.Entity

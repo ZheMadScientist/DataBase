@@ -2,19 +2,15 @@ package wrapper.database;
 
 import wrapper.utils.DBProvider;
 
+import java.util.Iterator;
+
 public class DB {
     public static void main(String args[]) {
         DBProvider provider = new DBProvider();
 
-        provider.executeRawSQL("DROP TABLE THESAURUS");
+        Iterator it = provider.getAllTables().iterator();
+        while (it.hasNext())
+            provider.executeRawSQL("DROP TABLE " + it.next());
 
-        String createThesaurus = "CREATE TABLE THESAURUS " +
-                "(ID INT PRIMARY KEY     NOT NULL," +
-                " GUID           bigint  NOT NULL," +
-                " name           text    NOT NULL," +
-                " sense          text    NOT NULL," +
-                " comments       text)";
-
-        provider.executeRawSQL(createThesaurus);
     }
 }

@@ -9,7 +9,10 @@ import javax.persistence.*;
 @javax.persistence.Entity
 public class Task extends Entity {
 
+    String name;
 
-    @Basic
-    String content;
+    String description;
+
+    @ManyToOne
+    Material material;
 }

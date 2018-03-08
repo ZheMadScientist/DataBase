@@ -31,6 +31,28 @@ public class DBProvider {
         log.log(Level.INFO, "Successfully connected to database ");
     }
 
+    public List<String> getAllTables () {
+
+        ArrayList<String> tables = new ArrayList<>();
+
+        try {
+            connect(true);
+            DatabaseMetaData metaData = c.getMetaData();
+
+            String[] types = {"TABLE"};
+            ResultSet rs = metaData.getTables(null, null, "%", types);
+
+            while (rs.next())
+                tables.add(rs.getString(3));
+
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tables;
+    }
+
     public boolean executeRawSQL(String sql) {
         try {
             connect(true);

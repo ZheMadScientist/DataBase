@@ -9,12 +9,12 @@ import javax.persistence.*;
 public class Material extends wrapper.model.Entity{
 
     @Basic
-    public String description;
+    String description;
 
     @Basic
-    public String name;
+    String name;
 
-    //@Basic
-    //public Content content;
+    @ManyToOne//fetch
+    Content content;
 
 }
