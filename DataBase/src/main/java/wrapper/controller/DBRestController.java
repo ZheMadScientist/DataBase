@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import wrapper.model.storage.Material;
 
 @RestController
-public class DBController {
+public class DBRestController {
 
     @CrossOrigin
     @RequestMapping("/material")

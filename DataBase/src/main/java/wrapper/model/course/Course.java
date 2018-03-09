@@ -1,24 +1,25 @@
 package wrapper.model.course;
 
 import lombok.Data;
-import org.springframework.data.annotation.Persistent;
 import wrapper.model.Entity;
-import wrapper.model.storage.Material;
-import wrapper.model.storage.Task;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @javax.persistence.Entity
-public class Course extends Entity {
+public class Course extends Entity implements Serializable {
+
+    @Id
+    @GeneratedValue
+    long course_id;
 
     String courseName;
 
     String courseDescription;
 
-    //Collection<Task> tasks;
-
-    //Collection<Material> materials;
+    @OneToOne
+    CourseState courseState;
 
 
 }

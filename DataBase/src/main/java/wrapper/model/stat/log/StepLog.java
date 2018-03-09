@@ -2,13 +2,12 @@ package wrapper.model.stat.log;
 
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-public class StepLog {
+public class StepLog extends wrapper.model.Entity implements Serializable{
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.TABLE)

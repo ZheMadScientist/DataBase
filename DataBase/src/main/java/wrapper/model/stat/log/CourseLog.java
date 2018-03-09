@@ -5,16 +5,17 @@ import lombok.Data;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
-public class CourseLog {
+public class CourseLog extends wrapper.model.Entity implements Serializable{
 
     @Id
     Integer course_log_id;
 
     @ElementCollection
-    Set<String> logs;
+    List<String> logs;
 
 }

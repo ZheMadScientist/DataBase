@@ -9,8 +9,11 @@ public class DB {
         DBProvider provider = new DBProvider();
 
         Iterator it = provider.getAllTables().iterator();
-        while (it.hasNext())
-            provider.executeRawSQL("DROP TABLE " + it.next());
+        while (it.hasNext()) {
+            String tmp = it.next() + "";
+            if(!(tmp.contains("databasechangelog") || tmp.contains("hibernate")))
+            provider.executeRawSQL("DROP TABLE " + tmp + " CASCADE");
+        }
 
     }
 }

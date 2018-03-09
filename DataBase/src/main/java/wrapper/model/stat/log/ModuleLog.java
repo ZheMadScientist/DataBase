@@ -2,17 +2,16 @@ package wrapper.model.stat.log;
 
 import lombok.Data;
 
-import javax.persistence.Basic;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
-public class ModuleLog {
+public class ModuleLog extends wrapper.model.Entity implements Serializable{
 
     @Id
+    @GeneratedValue
     Integer module_log_id;
 
     @ElementCollection
