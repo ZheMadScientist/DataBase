@@ -10,10 +10,6 @@ import java.util.List;
 @Entity
 public class ModuleLog extends wrapper.model.Entity implements Serializable{
 
-    @Id
-    @GeneratedValue
-    Integer module_log_id;
-
     @ElementCollection
     public List<String> logs;
 }

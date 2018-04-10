@@ -13,16 +13,19 @@ public class DBProvider {
 
     Connection c;
 
+    String port;
+
     private Logger log;
 
-    public DBProvider() {
+    public DBProvider(String port) {
         log = Logger.getLogger(DBProvider.class.getName());
+        this.port = port;
     }
 
     private void connect(boolean isAutoCommit) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         c = DriverManager
-                .getConnection("jdbc:postgresql://localhost:5432/EduProcessBank",
+                .getConnection("jdbc:postgresql://localhost:" + port + "/EduProcessBank",
                         "postgres",
                         "qwerty");
         if(!isAutoCommit)

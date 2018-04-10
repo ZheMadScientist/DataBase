@@ -12,9 +12,6 @@ import java.util.List;
 @Entity
 public class CourseLog extends wrapper.model.Entity implements Serializable{
 
-    @Id
-    Integer course_log_id;
-
     @ElementCollection
     List<String> logs;
 

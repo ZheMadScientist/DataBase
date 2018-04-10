@@ -2,6 +2,8 @@ package wrapper.model.stat.log;
 
 
 import lombok.Data;
+import wrapper.model.user.User;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,9 +11,8 @@ import java.io.Serializable;
 @Entity
 public class StepLog extends wrapper.model.Entity implements Serializable{
 
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private long stepLogID;
+    @ManyToOne
+    User user;
 
-
+    String log;
 }

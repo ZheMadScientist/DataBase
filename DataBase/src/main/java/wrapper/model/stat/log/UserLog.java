@@ -10,10 +10,6 @@ import java.util.List;
 @Entity
 public class UserLog extends wrapper.model.Entity implements Serializable{
 
-    @Id
-    @GeneratedValue
-    long user_log_id;
-
     @OneToOne
     User user;
 

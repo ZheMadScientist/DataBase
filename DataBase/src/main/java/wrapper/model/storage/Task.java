@@ -10,11 +10,6 @@ import java.io.Serializable;
 @javax.persistence.Entity
 public class Task extends Entity implements Serializable{
 
-    @Id
-    @GeneratedValue
-    long task_id;
-
-
     String name;
 
     String description;

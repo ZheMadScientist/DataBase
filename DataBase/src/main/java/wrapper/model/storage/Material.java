@@ -9,10 +9,6 @@ import java.io.Serializable;
 @Entity
 public class Material extends wrapper.model.Entity implements Serializable{
 
-    @Id
-    @GeneratedValue
-    long material_id;
-
     @Basic
     String description;
 

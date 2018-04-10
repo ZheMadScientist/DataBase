@@ -10,10 +10,6 @@ import java.io.Serializable;
 @javax.persistence.Entity
 public class Course extends Entity implements Serializable {
 
-    @Id
-    @GeneratedValue
-    long course_id;
-
     String courseName;
 
     String courseDescription;

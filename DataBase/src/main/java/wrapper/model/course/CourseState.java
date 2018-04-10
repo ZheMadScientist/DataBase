@@ -13,10 +13,6 @@ import java.util.List;
 @javax.persistence.Entity
 public class CourseState extends Entity implements Serializable {
 
-    @Id
-    @GeneratedValue
-    long course_state_id;
-
     @Basic
     String groupName;
 

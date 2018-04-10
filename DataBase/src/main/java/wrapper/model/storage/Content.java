@@ -12,10 +12,6 @@ import java.io.Serializable;
 @Access(AccessType.FIELD)
 public class Content extends Entity implements Serializable{
 
-    @Id
-    @GeneratedValue
-    long content_id;
-
     @Basic
     public String content;
 }
