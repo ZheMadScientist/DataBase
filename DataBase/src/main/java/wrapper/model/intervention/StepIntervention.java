@@ -7,5 +7,5 @@ import wrapper.model.Entity;
 @javax.persistence.Entity
 public class StepIntervention extends Entity {
 
-
+    public String message;
 }

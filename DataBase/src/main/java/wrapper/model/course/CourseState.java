@@ -2,25 +2,25 @@ package wrapper.model.course;
 
 import lombok.Data;
 import wrapper.model.Entity;
-import wrapper.model.course.Course;
 import wrapper.model.user.User;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Data
 @javax.persistence.Entity
-public class CourseState extends Entity implements Serializable {
+public class CourseState extends Entity {
 
     @Basic
-    String groupName;
+    public String groupName;
 
 
     @ManyToMany
-    List <User> students;
+    public List <User> students;
 
     @OneToOne
-    Course course;
+    public Course course;
 
 }

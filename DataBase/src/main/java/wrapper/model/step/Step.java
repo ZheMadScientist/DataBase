@@ -14,8 +14,8 @@ import java.util.Collection;
 public class Step extends wrapper.model.Entity {
 
     @OneToMany
-    Collection<StepIntervention> interventions;
+    public Collection<StepIntervention> interventions;
 
     @ManyToOne
-    Module module;
+    public Module module;
 }

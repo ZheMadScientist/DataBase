@@ -2,7 +2,9 @@ package wrapper.model.storage;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Data
@@ -10,12 +12,12 @@ import java.io.Serializable;
 public class Material extends wrapper.model.Entity implements Serializable{
 
     @Basic
-    String description;
+    public String description;
 
     @Basic
-    String name;
+    public String name;
 
     @ManyToOne//fetch
-    Content content;
+    public Content content;
 
 }

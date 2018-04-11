@@ -3,7 +3,10 @@ package wrapper.model;
 import lombok.Data;
 import wrapper.model.descriptors.VersionDescription;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -15,9 +18,9 @@ public class Version {
 
     @Basic
     @NotNull
-    String version;
+    public String version;
 
-    VersionDescription versionDescription;
+    public VersionDescription versionDescription;
 
     public Version(){}
 

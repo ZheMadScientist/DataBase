@@ -4,15 +4,15 @@ package wrapper.model.stat.log;
 import lombok.Data;
 import wrapper.model.user.User;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity
-public class StepLog extends wrapper.model.Entity implements Serializable{
+public class StepLog extends wrapper.model.Entity {
 
     @ManyToOne
-    User user;
+    public User user;
 
-    String log;
+    public String log;
 }

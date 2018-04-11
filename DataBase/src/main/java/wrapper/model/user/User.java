@@ -1,8 +1,8 @@
 package wrapper.model.user;
 
 import lombok.Data;
-import wrapper.model.stat.log.UserLog;
 import wrapper.model.course.CourseState;
+import wrapper.model.stat.log.UserLog;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,17 +15,17 @@ public class User extends wrapper.model.Entity implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", optional = false)
     @PrimaryKeyJoinColumn
-    UserLog userLog;
+    public UserLog userLog;
 
     @Basic
-    String name;
+    public String name;
 
     @Basic
-    String middleName;
+    public String middleName;
 
     @Basic
-    String lastName;
+    public String lastName;
 
     @ManyToMany(mappedBy = "students")
-    List<CourseState> user_courses;
+    public List<CourseState> user_courses;
 }

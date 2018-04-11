@@ -2,17 +2,19 @@ package wrapper.model.stat.log;
 
 import lombok.Data;
 import wrapper.model.user.User;
-import javax.persistence.*;
-import java.io.Serializable;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Data
 @Entity
-public class UserLog extends wrapper.model.Entity implements Serializable{
+public class UserLog extends wrapper.model.Entity {
 
     @OneToOne
-    User user;
+    public User user;
 
     @ElementCollection
-    List <String> logs;
+    public List <String> logs;
 }

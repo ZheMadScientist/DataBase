@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Data
 @Entity
-public class Hint {
+public class Hint extends wrapper.model.Entity{
 
-    String message;
+    public String message;
 }

@@ -1,9 +1,11 @@
 package wrapper.model;
 
 import lombok.Data;
-import wrapper.utils.GuidGenerator;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @Data
 @MappedSuperclass

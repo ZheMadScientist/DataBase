@@ -4,15 +4,13 @@ import lombok.Data;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
-public class CourseLog extends wrapper.model.Entity implements Serializable{
+public class CourseLog extends wrapper.model.Entity {
 
     @ElementCollection
-    List<String> logs;
+    public List<String> logs;
 
 }

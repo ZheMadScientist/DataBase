@@ -28,14 +28,12 @@ public class DBRestController {
     @CrossOrigin
     @RequestMapping("/material")
     public Material material(@RequestParam(value="material_id", required = true, defaultValue = "0") long material_id) {
-        //return new Material(MaterialType.URL, name, "", new Content(ContentType.URL));
         return em.find(Material.class, material_id);
     }
 
     @CrossOrigin
     @RequestMapping("/task")
     public Task task (@RequestParam(value="name", required = false, defaultValue = "1") String name) {
-        //return new Material(MaterialType.URL, name, "", new Content(ContentType.URL));
         return null;
     }
 
@@ -77,7 +75,6 @@ public class DBRestController {
     @CrossOrigin
     @RequestMapping("/getEntityByGUID")
     public Entity entity (@RequestParam(value="guid", required = true, defaultValue = "0") long guid) {
-        //return new Material(MaterialType.URL, name, "", new Content(ContentType.URL));
         return em.find(Entity.class, guid);
     }
 }

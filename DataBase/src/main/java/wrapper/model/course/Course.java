@@ -3,19 +3,18 @@ package wrapper.model.course;
 import lombok.Data;
 import wrapper.model.Entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.OneToOne;
 
 @Data
 @javax.persistence.Entity
-public class Course extends Entity implements Serializable {
+public class Course extends Entity {
 
-    String courseName;
+    public String courseName;
 
-    String courseDescription;
+    public String courseDescription;
 
     @OneToOne
-    CourseState courseState;
+    public CourseState courseState;
 
 
 }

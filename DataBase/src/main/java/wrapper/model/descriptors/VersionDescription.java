@@ -13,9 +13,9 @@ public class VersionDescription {
 
     @Id
     @GeneratedValue
-    long version_description_id;
+    public long version_description_id;
 
-    String description;
+    public String description;
 
     public VersionDescription(String description){
         if(description != null)

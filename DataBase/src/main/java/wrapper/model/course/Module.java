@@ -1,7 +1,10 @@
 package wrapper.model.course;
 
-public class Module {
+import lombok.Data;
+import wrapper.model.Entity;
 
-
+@Data
+@javax.persistence.Entity
+public class Module extends Entity{
 
 }

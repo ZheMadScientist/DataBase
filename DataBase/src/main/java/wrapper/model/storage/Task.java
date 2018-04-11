@@ -3,17 +3,17 @@ package wrapper.model.storage;
 import lombok.Data;
 import wrapper.model.Entity;
 
-import javax.persistence.*;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Data
 @javax.persistence.Entity
 public class Task extends Entity implements Serializable{
 
-    String name;
+    public String name;
 
-    String description;
+    public String description;
 
     @ManyToOne
-    Material material;
+    public Material material;
 }
