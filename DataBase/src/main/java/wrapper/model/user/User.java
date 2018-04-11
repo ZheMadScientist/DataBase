@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "users", indexes = { @Index( name = "user_index",  columnList="name,middleName,lastName", unique = true ) })
 public class User extends wrapper.model.Entity implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", optional = false)

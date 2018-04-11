@@ -2,22 +2,27 @@ package wrapper.model.storage;
 
 import lombok.Data;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import java.io.Serializable;
+import javax.persistence.*;
 
 @Data
 @Entity
-public class Material extends wrapper.model.Entity implements Serializable{
+@Table( indexes = { @Index ( name = "material_index",  columnList="name", unique = true ) } )
+public class Material extends wrapper.model.Entity {
+
+    public String name;
 
     @Basic
     public String description;
 
-    @Basic
-    public String name;
-
     @ManyToOne//fetch
     public Content content;
+
+    public Material(){}
+
+    public Material(String name, String description, String content){
+        this.name = name;
+        this.description = description;
+        this.content = new Content(content);
+    }
 
 }

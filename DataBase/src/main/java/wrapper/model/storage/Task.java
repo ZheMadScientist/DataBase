@@ -3,12 +3,14 @@ package wrapper.model.storage;
 import lombok.Data;
 import wrapper.model.Entity;
 
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
+import javax.persistence.Table;
 
 @Data
 @javax.persistence.Entity
-public class Task extends Entity implements Serializable{
+@Table( indexes = { @Index( name = "task_index",  columnList="name,description", unique = true ) } )
+public class Task extends Entity {
 
     public String name;
 

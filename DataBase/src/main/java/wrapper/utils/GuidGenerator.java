@@ -29,7 +29,8 @@ public class GuidGenerator {
 
         while (!isUnique){
             res = generateNext();
-            isUnique = storage.guids.add(res);
+            //isUnique = storage.guids.add(res);
+            isUnique = true;
         }
 
         return res;

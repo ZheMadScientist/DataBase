@@ -2,6 +2,7 @@ package wrapper.model.descriptors;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ public class VersionDescription {
     @GeneratedValue
     public long version_description_id;
 
+    @Column(columnDefinition = "text")
     public String description;
 
     public VersionDescription(String description){

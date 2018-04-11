@@ -5,13 +5,19 @@ import wrapper.model.Entity;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Basic;
+import javax.persistence.Column;
 
 @Data
 @javax.persistence.Entity
 @Access(AccessType.FIELD)
 public class Content extends Entity {
 
-    @Basic
+    @Column(columnDefinition = "text")
     public String content;
+
+    public Content(){}
+
+    public Content(String content){
+        this.content = content;
+    }
 }

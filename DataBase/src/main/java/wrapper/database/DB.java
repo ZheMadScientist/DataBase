@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class DB {
     public static void main(String args[]) {
-        DBProvider provider = new DBProvider("5433");
+        DBProvider provider = new DBProvider("5432");
 
         Iterator it = provider.getAllTables().iterator();
         while (it.hasNext()) {

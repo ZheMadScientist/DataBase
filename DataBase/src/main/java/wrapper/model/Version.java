@@ -3,26 +3,23 @@ package wrapper.model;
 import lombok.Data;
 import wrapper.model.descriptors.VersionDescription;
 
-import javax.persistence.Basic;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Data
+@MappedSuperclass
 public class Version {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Basic
     @NotNull
     public String version;
 
+    @OneToOne
     public VersionDescription versionDescription;
 
-    public Version(){}
+    public Version(){
+        version = "1";
+    }
 
     public Version(String version, String description){
         this.version = version;
