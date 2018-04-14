@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ExcelReader">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../ExcelReader/out/artifacts/ExcelReader/ExcelReader.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
