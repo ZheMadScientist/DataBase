@@ -1,5 +1,6 @@
 package database.model;
 
+import database.utils.GuidGenerator;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,11 @@ import javax.persistence.MappedSuperclass;
 public class Entity extends Version {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     public long GUID;
+
+    public Entity(){
+        GUID = new GuidGenerator().issueNewGUID();
+    }
 
 }

@@ -1,14 +1,26 @@
 package database.model.storage.AIDS;
 
-import lombok.Data;
-
 import java.util.TreeSet;
 
-@Data
 public class GuidStorage {
-    public TreeSet<Long> guids;
 
-    public GuidStorage(){
-        //TODO: get guids from DB
+    static GuidStorage instance;
+
+    TreeSet<Long> guids;
+
+    GuidStorage(){
+        //TODO: get all GUIDs via sql-request
     }
+
+    public static GuidStorage getInstance() {
+        if(instance == null)
+            instance = new GuidStorage();
+
+        return instance;
+    }
+
+    public boolean addGUID(long guid){
+        return guids.add(guid);
+    }
+
 }

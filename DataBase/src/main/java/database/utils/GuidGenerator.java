@@ -12,12 +12,12 @@ public class GuidGenerator {
     LocalDate date;
 
     public GuidGenerator(){
-        storage = new GuidStorage();
+        storage = GuidStorage.getInstance();
         date = LocalDate.now();
     }
 
     public GuidGenerator(Entity entity){
-        storage = new GuidStorage();
+        storage = GuidStorage.getInstance();
         this.entity = entity;
         date = LocalDate.now();
     }
@@ -29,7 +29,7 @@ public class GuidGenerator {
 
         while (!isUnique){
             res = generateNext();
-            //isUnique = storage.guids.add(res);
+            //isUnique = storage.addGUID(res);
             isUnique = true;
         }
 
