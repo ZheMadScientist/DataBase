@@ -84,14 +84,14 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.tomcat:tomcat-annotations-api:8.5.23" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: ch.qos.logback:logback-core:1.1.11" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: persistence-wrapper.controller-1.0.2:2">
+      <library name="Gradle: persistence-database.controller-1.0.2:2">
         <CLASSES />
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: validation-wrapper.controller-2.0.1.Final:Final">
+      <library name="Gradle: validation-database.controller-2.0.1.Final:Final">
         <CLASSES />
         <JAVADOC />
         <SOURCES />
@@ -152,14 +152,14 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.tomcat:tomcat-annotations-api:8.5.23" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: ch.qos.logback:logback-core:1.1.11" level="project" />
     <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: persistence-wrapper.controller-1.0.2:2">
+      <library name="Gradle: persistence-database.controller-1.0.2:2">
         <CLASSES />
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="RUNTIME">
-      <library name="Gradle: validation-wrapper.controller-2.0.1.Final:Final">
+      <library name="Gradle: validation-database.controller-2.0.1.Final:Final">
         <CLASSES />
         <JAVADOC />
         <SOURCES />
@@ -237,14 +237,14 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.ow2.asm:asm:5.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.postgresql:postgresql:42.1.4" level="project" />
     <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: persistence-wrapper.controller-1.0.2:2">
+      <library name="Gradle: persistence-database.controller-1.0.2:2">
         <CLASSES />
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="TEST">
-      <library name="Gradle: validation-wrapper.controller-2.0.1.Final:Final">
+      <library name="Gradle: validation-database.controller-2.0.1.Final:Final">
         <CLASSES />
         <JAVADOC />
         <SOURCES />
