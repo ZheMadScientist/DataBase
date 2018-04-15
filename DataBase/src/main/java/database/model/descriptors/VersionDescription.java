@@ -2,10 +2,7 @@ package database.model.descriptors;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Data
@@ -13,7 +10,7 @@ import javax.persistence.Id;
 public class VersionDescription {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long version_description_id;
 
     @Column(columnDefinition = "text")

@@ -1,5 +1,6 @@
 package database.model.course;
 
+import database.model.stat.log.CourseLog;
 import lombok.Data;
 import database.model.Entity;
 
@@ -16,5 +17,6 @@ public class Course extends Entity {
     @OneToOne
     public CourseState courseState;
 
-
+    @OneToOne
+    public CourseLog courseLog;
 }

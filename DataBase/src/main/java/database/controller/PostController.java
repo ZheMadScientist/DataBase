@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+@CrossOrigin
+@Transactional
 @RestController
 @RequestMapping(value = "/post")
 public class PostController {
@@ -16,17 +18,32 @@ public class PostController {
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
-    @CrossOrigin
-    @Transactional
-    @RequestMapping(value = "/material", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/insertMaterial", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void insertMaterial (@RequestBody Material material) {
+    public Material insertMaterial (@RequestBody Material material) {
 
         Material newInstance = new Material(material);
 
         em.persist(newInstance.content);
         em.persist(newInstance);
         em.flush();
+
+        return newInstance;
+    }
+
+    @RequestMapping(value = "/updateMaterial", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Material updateMaterial (@RequestBody Material material) {
+
+        Material newInstance = new Material(material);
+        newInstance.GUID = material.GUID;
+
+        em.merge(newInstance.content);
+        em.merge(newInstance);
+        em.flush();
+
+        return newInstance;
     }
 
 }

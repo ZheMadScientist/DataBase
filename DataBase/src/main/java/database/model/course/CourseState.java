@@ -16,7 +16,6 @@ public class CourseState extends Entity {
     @Basic
     public String groupName;
 
-
     @ManyToMany
     public List <User> students;
 

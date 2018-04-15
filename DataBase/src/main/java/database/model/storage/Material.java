@@ -20,13 +20,8 @@ public class Material extends database.model.Entity {
 
     public Material(){}
 
-    public Material(String name, String description, String content){
-        this.name = name;
-        this.description = description;
-        this.content = new Content(content);
-    }
-
     public Material(Material another){
+        super(another.version, another.versionDescription.description);
         this.name = another.name;
         this.description = another.description;
         this.content = new Content(another.content);

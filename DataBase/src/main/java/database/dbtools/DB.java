@@ -1,4 +1,4 @@
-package database.database;
+package database.dbtools;
 
 import database.utils.DBProvider;
 

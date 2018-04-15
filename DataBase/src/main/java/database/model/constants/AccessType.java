@@ -1,6 +1,8 @@
 package database.model.constants;
 
-public class Access {
+public class AccessType {
+
+    public static final String NO_ACCESS = "noaccess";
 
     public static final String RD_ONLY = "readonly";
 

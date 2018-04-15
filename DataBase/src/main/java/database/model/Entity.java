@@ -20,4 +20,8 @@ public class Entity extends Version {
         GUID = new GuidGenerator().issueNewGUID();
     }
 
+    public Entity(String version, String versionDescription){
+        super(version, versionDescription);
+        GUID = new GuidGenerator().issueNewGUID();
+    }
 }
