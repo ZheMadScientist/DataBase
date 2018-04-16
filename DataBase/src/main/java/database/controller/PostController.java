@@ -19,21 +19,23 @@ public class PostController {
     private EntityManager em;
 
 
-    @RequestMapping(value = "/insertMaterial", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
+    @RequestMapping(value = "/insertMaterial", method = RequestMethod.POST)
     public Material insertMaterial (@RequestBody Material material) {
 
         Material newInstance = new Material(material);
 
+        em.persist(newInstance.content.versionDescription);
         em.persist(newInstance.content);
+        em.persist(newInstance.versionDescription);
         em.persist(newInstance);
         em.flush();
 
         return newInstance;
     }
 
-    @RequestMapping(value = "/updateMaterial", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
+    @RequestMapping(value = "/updateMaterial", method = RequestMethod.POST)
     public Material updateMaterial (@RequestBody Material material) {
 
         Material newInstance = new Material(material);

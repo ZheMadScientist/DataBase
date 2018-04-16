@@ -15,7 +15,7 @@ public class Material extends database.model.Entity {
     @Column(columnDefinition = "text")
     public String description;
 
-    @ManyToOne//fetch
+    @ManyToOne
     public Content content;
 
     public Material(){}
