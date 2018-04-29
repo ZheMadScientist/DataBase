@@ -18,4 +18,13 @@ public class Task extends Entity {
 
     @ManyToOne
     public Material material;
+
+    public Task () {}
+
+    public Task (Task old) {
+        super(old.version, old.versionDescription.description);
+        this.name = old.name;
+        this.description = old.description;
+        this.material = old.material;
+    }
 }

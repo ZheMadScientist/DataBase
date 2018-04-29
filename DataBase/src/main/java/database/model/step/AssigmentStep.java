@@ -13,4 +13,11 @@ public class AssigmentStep extends Step {
 
     @OneToMany
     public List<Task> tasks;
+
+    public AssigmentStep(){}
+
+    public AssigmentStep(AssigmentStep old){
+        this.tasks = old.tasks;
+    }
+
 }

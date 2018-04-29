@@ -6,6 +6,7 @@ import database.model.stat.log.UserLog;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,6 +29,22 @@ public class User extends database.model.Entity {
     @ManyToMany(mappedBy = "students")
     public List<CourseState> user_courses;
 
-    @OneToOne
+    @ManyToOne
     Access access;
+
+    public User(){
+        initDS();
+    }
+
+    public User(User other){
+        initDS();
+        name = other.name;
+        middleName = other.middleName;
+        lastName = other.lastName;
+    }
+
+    private void initDS (){
+        userLog = new UserLog();
+        user_courses = new ArrayList<>();
+    }
 }

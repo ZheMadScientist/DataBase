@@ -19,4 +19,15 @@ public class Course extends Entity {
 
     @OneToOne
     public CourseLog courseLog;
+
+    public Course () {}
+
+    public Course (Course old) {
+        super(old.version, old.versionDescription.description);
+        this.courseName = old.courseName;
+        this.courseDescription = old.courseDescription;
+        this.courseState = old.courseState;
+        this.courseLog = old.courseLog;
+
+    }
 }

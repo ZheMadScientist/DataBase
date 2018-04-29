@@ -18,4 +18,13 @@ public class Step extends database.model.Entity {
 
     @ManyToOne
     public Module module;
+
+    public Step () {}
+
+    public Step (Step old) {
+        super(old.version, old.versionDescription.description);
+        this.interventions = old.interventions;
+        this.module = old.module;
+    }
+
 }

@@ -18,4 +18,12 @@ public class CourseLog extends database.model.Entity {
     @ElementCollection
     public List<String> logs;
 
+    public CourseLog () {}
+
+    public CourseLog (CourseLog old) {
+        super(old.version, old.versionDescription.description);
+        this.course = old.course;
+        this.logs = old.logs;
+    }
+
 }

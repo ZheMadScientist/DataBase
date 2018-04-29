@@ -13,4 +13,11 @@ public class TestStep extends AssigmentStep {
 
     @OneToMany
     public List<Key> keys;
+
+    public TestStep () {}
+
+    public TestStep (TestStep old) {
+        this.keys = old.keys;
+    }
+
 }

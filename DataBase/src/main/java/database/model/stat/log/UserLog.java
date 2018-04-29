@@ -6,6 +6,7 @@ import database.model.user.User;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,4 +18,14 @@ public class UserLog extends database.model.Entity {
 
     @ElementCollection
     public List <String> logs;
+
+    public UserLog(){
+        logs = new ArrayList<>();
+    }
+
+    public UserLog(UserLog old) {
+        super(old.version, old.versionDescription.description);
+        this.logs = old.logs;
+        this.user = old.user;
+    }
 }
