@@ -38,6 +38,8 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = material.GUID;
 
+            em.persist(newInstance.content.versionDescription);
+            em.persist(newInstance.versionDescription);
             em.merge(newInstance.content);
             em.merge(newInstance);
         } else {

@@ -1,8 +1,9 @@
 package database.utils;
 
+import database.constants.DBConstants;
+
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,6 +109,44 @@ public class DBProvider {
 
         return true;
     }
+
+    public Set<Long> getAllId () {
+        TreeSet<Long> selected = new TreeSet<>();
+
+        try{
+            connect(false);
+
+            Statement s = c.createStatement();
+
+            Iterator it = getAllTables().iterator();
+            while (it.hasNext()) {
+
+                String tmp = it.next() + "";
+
+                if(!(tmp.contains("databasechangelog") || tmp.contains("hibernate") || Arrays.asList(DBConstants.NON_ENTITY_EXTENDED_ELEMENTS).contains(tmp))){
+                    String query = "SELECT * FROM " + tmp + ";";
+
+                    ResultSet rs = s.executeQuery(query);
+
+                    while ( rs.next() ) {
+                        long guid = rs.getLong("guid");
+                        selected.add(guid);
+                    }
+                    rs.close();
+
+                }
+            }
+
+            s.close();
+            c.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return selected;
+    }
+
     //           <id in table, table's field>                       <field type , id in table>
     public List< Pair <String, Object> > select (String from, List< Pair <String, String> > fields){
         ArrayList< Pair <String, Object> > selected = new ArrayList<>();

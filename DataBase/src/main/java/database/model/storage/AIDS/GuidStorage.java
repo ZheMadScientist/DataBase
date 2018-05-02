@@ -1,15 +1,20 @@
 package database.model.storage.AIDS;
 
-import java.util.TreeSet;
+import database.constants.DBConstants;
+import database.utils.DBProvider;
+
+import java.util.Set;
+
 
 public class GuidStorage {
 
     static GuidStorage instance;
 
-    TreeSet<Long> guids;
+    Set<Long> guids;
+
 
     GuidStorage(){
-        //TODO: get all GUIDs via sql-request
+        guids = new DBProvider(DBConstants.PORT).getAllId();
     }
 
     public static GuidStorage getInstance() {
