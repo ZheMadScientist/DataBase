@@ -14,7 +14,7 @@ public class Access {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    public long id;
 
     public String courseState;
 

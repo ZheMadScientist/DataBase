@@ -1,7 +1,7 @@
 package database.model.storage;
 
-import lombok.Data;
 import database.model.Entity;
+import lombok.Data;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

@@ -34,6 +34,8 @@ dependencies {
 
     runtime('org.postgresql:postgresql:42.1.4')
 
+    compile 'com.google.code.gson:gson:2.8.4'
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
 }

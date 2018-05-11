@@ -1,8 +1,8 @@
 package database.model.course;
 
-import lombok.Data;
 import database.model.Entity;
 import database.model.user.User;
+import lombok.Data;
 
 import javax.persistence.Basic;
 import javax.persistence.ManyToMany;

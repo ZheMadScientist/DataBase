@@ -1,8 +1,8 @@
 package database.model.step;
 
-import lombok.Data;
 import database.model.course.Module;
 import database.model.intervention.StepIntervention;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

@@ -1,7 +1,7 @@
 package database.model;
 
-import lombok.Data;
 import database.model.descriptors.VersionDescription;
+import lombok.Data;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;

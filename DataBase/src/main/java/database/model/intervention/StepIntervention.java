@@ -1,7 +1,7 @@
 package database.model.intervention;
 
-import lombok.Data;
 import database.model.Entity;
+import lombok.Data;
 
 @Data
 @javax.persistence.Entity

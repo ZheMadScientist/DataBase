@@ -1,8 +1,8 @@
 package database.model.course;
 
+import database.model.Entity;
 import database.model.stat.log.ModuleLog;
 import lombok.Data;
-import database.model.Entity;
 
 import javax.persistence.OneToOne;
 

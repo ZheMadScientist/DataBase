@@ -28,4 +28,8 @@ public class GuidStorage {
         return guids.add(guid);
     }
 
+    public boolean contains(long guid){
+        return guids.contains(guid);
+    }
+
 }

@@ -1,11 +1,10 @@
 package database.model.user;
 
-import lombok.Data;
 import database.model.course.CourseState;
 import database.model.stat.log.UserLog;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,15 +21,14 @@ public class User extends database.model.Entity {
     @Basic
     public String lastName;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", optional = false)
-    @PrimaryKeyJoinColumn
+    @OneToOne
     public UserLog userLog;
 
-    @ManyToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "students")
     public List<CourseState> user_courses;
 
     @ManyToOne
-    Access access;
+    public Access access;
 
     public User(){
         initDS();

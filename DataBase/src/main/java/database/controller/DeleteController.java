@@ -3,9 +3,6 @@ package database.controller;
 import database.model.course.Course;
 import database.model.stat.log.CourseLog;
 import database.model.stat.log.UserLog;
-import database.model.step.AssigmentStep;
-import database.model.step.Step;
-import database.model.step.TestStep;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.model.user.User;
@@ -25,7 +22,6 @@ public class DeleteController {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
-
 
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/material", method = RequestMethod.DELETE)

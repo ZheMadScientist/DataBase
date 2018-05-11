@@ -3,12 +3,10 @@ package database.controller;
 import database.model.course.Course;
 import database.model.stat.log.CourseLog;
 import database.model.stat.log.UserLog;
-import database.model.step.AssigmentStep;
-import database.model.step.Step;
-import database.model.step.TestStep;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.model.user.User;
+import database.versioning.VController;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +24,7 @@ public class PostController {
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
+    VController versionController = new VController();
 
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/material", method = RequestMethod.POST)
@@ -37,6 +36,8 @@ public class PostController {
 
         if (instance != null) {
             newInstance.GUID = material.GUID;
+
+            versionController.createDump(newInstance, Material.class);
 
             em.persist(newInstance.content.versionDescription);
             em.persist(newInstance.versionDescription);
@@ -63,6 +64,8 @@ public class PostController {
 
         if (instance != null) {
             newInstance.GUID = task.GUID;
+
+            versionController.createDump(newInstance, Task.class);
 
             em.merge(newInstance.material.content);
             em.merge(newInstance.material);
@@ -91,6 +94,8 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = user.GUID;
 
+            versionController.createDump(newInstance, User.class);
+
             em.merge(newInstance.userLog);
             em.merge(newInstance);
         } else {
@@ -114,6 +119,8 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = userLog.GUID;
 
+            versionController.createDump(newInstance, UserLog.class);
+
             em.merge(newInstance);
         } else {
             em.persist(newInstance.versionDescription);
@@ -134,6 +141,8 @@ public class PostController {
 
         if (instance != null) {
             newInstance.GUID = course.GUID;
+
+            versionController.createDump(newInstance, Course.class);
 
             em.merge(newInstance.courseState);
             em.merge(newInstance.courseLog);
@@ -159,6 +168,8 @@ public class PostController {
 
         if (instance != null) {
             newInstance.GUID = courseLog.GUID;
+
+            versionController.createDump(newInstance, CourseLog.class);
 
             em.merge(newInstance.logs);
             em.merge(newInstance);

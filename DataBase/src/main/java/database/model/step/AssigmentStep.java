@@ -1,7 +1,7 @@
 package database.model.step;
 
-import lombok.Data;
 import database.model.storage.Task;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
