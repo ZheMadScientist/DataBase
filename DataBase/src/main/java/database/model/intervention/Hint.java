@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+/**
+ * Класс, описывающий подсказку
+ */
 @Data
 @Entity
 @Table( indexes = { @Index( name = "hint_index",  columnList="message", unique = false ) } )

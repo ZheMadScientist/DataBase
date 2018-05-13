@@ -6,6 +6,9 @@ import lombok.Data;
 
 import javax.persistence.OneToOne;
 
+/**
+ * Класс, описывающий курс (как учебную единицу)
+ */
 @Data
 @javax.persistence.Entity
 public class Course extends Entity {
@@ -14,9 +17,17 @@ public class Course extends Entity {
 
     public String courseDescription;
 
+    /**
+     * Состояние курса
+     * @see CourseState
+     */
     @OneToOne
     public CourseState courseState;
 
+    /**
+     * Логи курса
+     * @see CourseLog
+     */
     @OneToOne
     public CourseLog courseLog;
 

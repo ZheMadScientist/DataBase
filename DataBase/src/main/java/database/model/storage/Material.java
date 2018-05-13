@@ -4,17 +4,21 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * Класс, описывающий материал
+ */
 @Data
 @Entity
 @Table( indexes = { @Index ( name = "material_index",  columnList="name,description", unique = true ) } )
 public class Material extends database.model.Entity {
 
-    @Column(columnDefinition = "text")
     public String name;
 
-    @Column(columnDefinition = "text")
     public String description;
 
+    /**
+     * Контент, который предоставляет материал
+     */
     @ManyToOne
     public Content content;
 

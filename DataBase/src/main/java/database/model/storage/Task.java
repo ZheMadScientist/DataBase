@@ -7,6 +7,9 @@ import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Класс, описывающий "задание"
+ */
 @Data
 @javax.persistence.Entity
 @Table( indexes = { @Index( name = "task_index",  columnList="name,description", unique = false ) } )
@@ -16,6 +19,9 @@ public class Task extends Entity {
 
     public String description;
 
+    /**
+     * Вложенный материал
+     */
     @ManyToOne
     public Material material;
 

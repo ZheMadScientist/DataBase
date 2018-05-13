@@ -37,7 +37,7 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = material.GUID;
 
-            versionController.createDump(newInstance, Material.class);
+            versionController.createDump(newInstance, instance, Material.class);
 
             em.persist(newInstance.content.versionDescription);
             em.persist(newInstance.versionDescription);
@@ -65,7 +65,7 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = task.GUID;
 
-            versionController.createDump(newInstance, Task.class);
+            versionController.createDump(newInstance, instance, Task.class);
 
             em.merge(newInstance.material.content);
             em.merge(newInstance.material);
@@ -94,7 +94,7 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = user.GUID;
 
-            versionController.createDump(newInstance, User.class);
+            versionController.createDump(newInstance, instance, User.class);
 
             em.merge(newInstance.userLog);
             em.merge(newInstance);
@@ -119,7 +119,7 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = userLog.GUID;
 
-            versionController.createDump(newInstance, UserLog.class);
+            versionController.createDump(newInstance, instance, UserLog.class);
 
             em.merge(newInstance);
         } else {
@@ -142,7 +142,7 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = course.GUID;
 
-            versionController.createDump(newInstance, Course.class);
+            versionController.createDump(newInstance, instance, Course.class);
 
             em.merge(newInstance.courseState);
             em.merge(newInstance.courseLog);
@@ -169,7 +169,7 @@ public class PostController {
         if (instance != null) {
             newInstance.GUID = courseLog.GUID;
 
-            versionController.createDump(newInstance, CourseLog.class);
+            versionController.createDump(newInstance, instance, CourseLog.class);
 
             em.merge(newInstance.logs);
             em.merge(newInstance);

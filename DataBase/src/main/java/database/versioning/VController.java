@@ -13,12 +13,24 @@ import javax.persistence.PersistenceContextType;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Класс, предоставляющий функциональность создания, получения и удаления версий объектов
+ */
 public class VController {
 
+    /**
+     * Объект {@linkplain EntityManager} для работы с БД
+     */
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
-
+    /**
+     * @deprecated
+     * Метод, сохраняющий предыдущую версию объекта, если она присутствует в БД
+     * @param newInstance - обновленный объект
+     * @param c - класс объекта
+     * @param <T> - тип объекта, наследник класса {@link Entity}
+     */
     public <T extends Entity> void createDump (T newInstance, Class<T> c){
 
         T old = em.find(c, newInstance.GUID);
@@ -26,6 +38,13 @@ public class VController {
         createDump(newInstance, old, c);
     }
 
+    /**
+     * Метод, сохраняющий предыдущую версию объекта
+     * @param newInstance - обновленный объект
+     * @param old - текущий (устаревший) объект
+     * @param c - класс объектов
+     * @param <T> - тип объектов, наследуется от {@link Entity}
+     */
     public <T extends Entity> void createDump (T newInstance, T old, Class<T> c){
 
         if(!GuidStorage.getInstance().contains(newInstance.GUID) || old == null)
@@ -45,6 +64,14 @@ public class VController {
     }
 
 
+    /**
+     * Метод для восстановления предыдущего состояния обекта по версии {@code version}
+     * @param latest - "самый новый" объект
+     * @param c - класс объекта
+     * @param version - версия объекта, которую необходимо восстановить
+     * @param <T> - тип объекта
+     * @return восстановленный до требуемой версии объект
+     */
     public <T extends Entity> T getOlder (T latest, Class<T> c, String version) {
         // seems wrong
         List<Versions> versions = em.createQuery("SELECT t FROM versions t where t.entity_id = :id")
@@ -78,10 +105,16 @@ public class VController {
         return res;
     }
 
+    /**
+     * Метод удаления всех сохраненных состояний объекта
+     * @param entity_id - GUID объекта
+     */
     public void deleteDumps(long entity_id){
         em.createQuery("delete from ChildEntity c where c.entity_id = :id")
                 .setParameter("id", entity_id)
                 .executeUpdate();
     }
+
+    // TODO: create delete by version method
 
 }

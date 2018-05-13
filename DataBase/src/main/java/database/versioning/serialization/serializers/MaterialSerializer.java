@@ -2,6 +2,7 @@ package database.versioning.serialization.serializers;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import database.model.Entity;
 import database.model.storage.Content;
 import database.model.storage.Material;
 import database.versioning.serialization.Constants;
@@ -12,8 +13,15 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+/**
+ * Реализация интерфейса {@link Serializer}
+ * для сериализации класса {@link Material}
+ * */
 public class MaterialSerializer implements Serializer<Material> {
 
+    /**
+     * @see Serializer#serialize(Entity)
+     */
     @Override
     public String serialize(Material src) {
         StringWriter sw = new StringWriter();
@@ -48,6 +56,11 @@ public class MaterialSerializer implements Serializer<Material> {
         return sw.toString();
     }
 
+    // TODO: change ser/des implementation cause Content always have unique guid
+
+    /**
+     * @see Serializer#deserialize(String, EntityManager)
+     */
     @Override
     public Material deserialize(String src, EntityManager em) {
         Material material = new Material();

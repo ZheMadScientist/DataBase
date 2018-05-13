@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Класс, хранящий права доступа для пользователя
+ */
+
+// TODO: refactor
 @Data
 @Entity
 public class Access {

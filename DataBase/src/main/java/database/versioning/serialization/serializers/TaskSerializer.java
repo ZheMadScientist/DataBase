@@ -2,6 +2,7 @@ package database.versioning.serialization.serializers;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import database.model.Entity;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.versioning.serialization.Constants;
@@ -12,8 +13,15 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+/**
+ * Реализация интерфейса {@link Serializer}
+ * для сериализации класса {@link Task}
+ * */
 public class TaskSerializer implements Serializer<Task> {
 
+    /**
+     * @see Serializer#serialize(Entity)
+     */
     @Override
     public String serialize(Task src) {
         StringWriter sw = new StringWriter();
@@ -37,6 +45,9 @@ public class TaskSerializer implements Serializer<Task> {
         return sw.toString();
     }
 
+    /**
+     * @see Serializer#deserialize(String, EntityManager)
+     */
     @Override
     public Task deserialize(String src, EntityManager em) {
         Task task = new Task();

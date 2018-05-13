@@ -7,10 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+/**
+ * Класс, описывающий присвоенный пользователю логически завершенный блок заданий
+ */
 @Data
 @Entity
 public class AssigmentStep extends Step {
 
+    /**
+     * Список заданий
+     */
     @OneToMany
     public List<Task> tasks;
 

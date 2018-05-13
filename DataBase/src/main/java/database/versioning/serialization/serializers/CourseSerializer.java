@@ -2,6 +2,7 @@ package database.versioning.serialization.serializers;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import database.model.Entity;
 import database.model.course.Course;
 import database.model.course.CourseState;
 import database.model.stat.log.CourseLog;
@@ -15,7 +16,15 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+/**
+ * Реализация интерфейса {@link Serializer}
+ * для сериализации класса {@link Course}
+ * */
 public class CourseSerializer implements Serializer <Course> {
+
+    /**
+     * @see Serializer#serialize(Entity)
+     */
     @Override
     public String serialize(Course src) {
         StringWriter sw = new StringWriter();
@@ -61,6 +70,9 @@ public class CourseSerializer implements Serializer <Course> {
         return sw.toString();
     }
 
+    /**
+     * @see Serializer#deserialize(String, EntityManager)
+     */
     @Override
     public Course deserialize(String src, EntityManager em) {
         Course course = new Course();

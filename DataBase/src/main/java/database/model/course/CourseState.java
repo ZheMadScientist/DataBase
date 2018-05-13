@@ -9,6 +9,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+/**
+ * Класс, описывающий состояние курса
+ */
 @Data
 @javax.persistence.Entity
 public class CourseState extends Entity {

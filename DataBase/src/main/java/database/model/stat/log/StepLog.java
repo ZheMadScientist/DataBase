@@ -7,6 +7,9 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+/**
+ * Класс, описывающий логи "шага" пользователя
+ */
 @Data
 @Entity
 public class StepLog extends database.model.Entity {

@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+/**
+ * Класс, описывающий логи курса
+ */
 @Data
 @Entity
 public class CourseLog extends database.model.Entity {

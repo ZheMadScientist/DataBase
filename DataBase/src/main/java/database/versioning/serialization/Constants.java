@@ -1,5 +1,8 @@
 package database.versioning.serialization;
 
+/**
+ * Класс, содержащий константы, необходимые для сериализации/десериализации
+ */
 public class Constants {
     public static final String VERSION = "version";
     public static final String VERSION_DESCRIPTION_ID = "versionDescription_id";

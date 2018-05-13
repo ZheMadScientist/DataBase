@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, описывающий логи пользователя
+ */
 @Data
 @Entity
 public class UserLog extends database.model.Entity {

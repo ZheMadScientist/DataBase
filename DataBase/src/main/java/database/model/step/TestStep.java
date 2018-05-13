@@ -7,10 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+/**
+ * Класс, описывающий присвоенный пользователю тест
+ */
 @Data
 @Entity
 public class TestStep extends AssigmentStep {
 
+    /**
+     * Список ключей
+     */
     @OneToMany
     public List<Key> keys;
 

@@ -6,8 +6,17 @@ import database.versioning.model.TokensWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, предоставляющий методы для версионирования
+ */
 public class VersioningUtils {
 
+    /**
+     * Метод, возвращающий {@link TokensWrapper}, хранящий "разницу" двух JSON
+     * @param firstJSON - JSON обновленного объекта
+     * @param secondJSON - JSON текущего (устаревшего) объекта
+     * @return {@linkplain TokensWrapper}
+     */
     public static TokensWrapper getTokensWrapper(String firstJSON, String secondJSON) {
         TokensWrapper tokensWrapper = new TokensWrapper();
 
@@ -34,6 +43,14 @@ public class VersioningUtils {
         return tokensWrapper;
     }
 
+    /**
+     * Метод, восстанавливающий предыдущее состояние объекта
+     * по его JSON и {@linkplain TokensWrapper} предыдущей версии
+     * @see TokensWrapper
+     * @param latestJSON JSON новейшего объекта
+     * @param wrapper соответствующий предыдущей версии {@linkplain TokensWrapper}
+     * @return строка в формате JSON восстановленного состояния объекта
+     */
     public static String recoverFromWrapper(String[] latestJSON, TokensWrapper wrapper){
         String res = "";
 
@@ -44,15 +61,19 @@ public class VersioningUtils {
 
         for(int i = 0; i < partsSize.size(); ++i){
             res = res.concat(recover(wrapper.getNext(partsSize.get(i)), latestJSON[i]));
+            res = res.concat(recover(wrapper.getNext(partsSize.get(i)), latestJSON[i]));
         }
 
         return res;
     }
 
     /**
-     * @param first - new version
-     * @param second - old version
-     **/
+     * Метод, находящий "разницу" строк (относительно первой строки) и токенизирующий ее
+     * @see Token
+     * @param first первая строка
+     * @param second вторая строка
+     * @return {@code List<Token>} токены
+     */
     static List<Token> getDiffs(String first, String second){
         List<Token> tokens = new ArrayList<>();
 
@@ -87,6 +108,12 @@ public class VersioningUtils {
         return tokens;
     }
 
+    /**
+     * Метод, восстанавливающий состояние строки по строке её последней версии и токенам строки предыдущей версии
+     * @param tokens токены строки предыдущей версии
+     * @param s последняя версия строки
+     * @return восстановленная строка
+     */
     static String recover(List<Token> tokens, String s){
         char[] tmp = s.toCharArray();
 
@@ -105,7 +132,7 @@ public class VersioningUtils {
 
             } else if(token.operation == '-') {
                 char[] buff = tmp;
-                tmp = new char[tmp.length - token.length()];
+                tmp = new char[tmp.length - token.lengthToDelete()];
                 System.arraycopy(buff, 0, tmp, 0, tmp.length);
 
             }

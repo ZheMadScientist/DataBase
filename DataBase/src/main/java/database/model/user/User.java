@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, описывающий пользователя
+ */
 @Data
 @Entity
 @Table(name = "users", indexes = { @Index( name = "user_index",  columnList="name,middleName,lastName", unique = true ) })
@@ -21,28 +24,30 @@ public class User extends database.model.Entity {
     @Basic
     public String lastName;
 
+    /**
+     * Объект, хранящий активность (логи) пользователя
+     */
     @OneToOne
-    public UserLog userLog;
+    public UserLog userLog = new UserLog();
 
+    /**
+     * Список курсов, в которых учавствует пользователь
+     */
     @OneToMany(mappedBy = "students")
-    public List<CourseState> user_courses;
+    public List<CourseState> user_courses = new ArrayList<>();
 
+    /**
+     * Объект, хранящий права доступа пользователя к другим сущностям бд
+     * @see Access
+     */
     @ManyToOne
     public Access access;
 
-    public User(){
-        initDS();
-    }
+    public User(){ }
 
     public User(User other){
-        initDS();
         name = other.name;
         middleName = other.middleName;
         lastName = other.lastName;
-    }
-
-    private void initDS (){
-        userLog = new UserLog();
-        user_courses = new ArrayList<>();
     }
 }

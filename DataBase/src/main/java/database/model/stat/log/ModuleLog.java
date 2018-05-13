@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+/**
+ * Класс, описывающий логи модуля
+ */
 @Data
 @Entity
 public class ModuleLog extends database.model.Entity {

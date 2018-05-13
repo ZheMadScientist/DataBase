@@ -8,6 +8,9 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+/**
+ * Класс, описывающий версию объекта
+ */
 @Data
 @MappedSuperclass
 public class Version {
@@ -15,9 +18,13 @@ public class Version {
     @NotNull
     public String version;
 
+    // TODO: replace with String
     @OneToOne
     public VersionDescription versionDescription;
 
+    /**
+     * Дата создания объекта
+     */
     public LocalDate date;
 
     public Version(){

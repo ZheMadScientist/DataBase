@@ -6,10 +6,16 @@ import lombok.Data;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Базовый класс для сущностей базы данных
+ */
 @Data
 @MappedSuperclass
 public class Entity extends Version {
 
+    /**
+     * Глобальный идентификатор
+     */
     @Id
     public long GUID;
 

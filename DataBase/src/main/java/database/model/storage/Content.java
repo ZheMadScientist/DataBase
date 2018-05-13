@@ -7,6 +7,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 
+/**
+ * Класс, описывающий контент
+ */
 @Data
 @javax.persistence.Entity
 @Access(AccessType.FIELD)

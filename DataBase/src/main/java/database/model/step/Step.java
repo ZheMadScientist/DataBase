@@ -9,12 +9,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.Collection;
 
+/**
+ * Класс, описывающий действие пользователя, влияющее на дальнейший процесс обучения
+ */
 @Data
 @Entity
 public class Step extends database.model.Entity {
 
+    /**
+     * Список возможных интервенций
+     */
     @OneToMany
     public Collection<StepIntervention> interventions;
+
 
     @ManyToOne
     public Module module;

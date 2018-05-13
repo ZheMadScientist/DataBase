@@ -2,6 +2,7 @@ package database.versioning.serialization.serializers;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import database.model.Entity;
 import database.model.user.Access;
 import database.model.user.User;
 import database.versioning.serialization.Constants;
@@ -12,8 +13,15 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+/**
+ * Реализация интерфейса {@link Serializer}
+ * для сериализации класса {@link User}
+ * */
 public class UserSerializer implements Serializer <User> {
 
+    /**
+     * @see Serializer#serialize(Entity)
+     */
     @Override
     public String serialize(User src) {
         StringWriter sw = new StringWriter();
@@ -39,6 +47,9 @@ public class UserSerializer implements Serializer <User> {
         return sw.toString();
     }
 
+    /**
+     * @see Serializer#deserialize(String, EntityManager)
+     */
     @Override
     public User deserialize(String src, EntityManager em) {
         User user = new User();

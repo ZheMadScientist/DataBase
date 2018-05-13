@@ -1,5 +1,8 @@
 package database.model.constants;
 
+/**
+ * Класс, содержащий константы уровней доступа
+ */
 public class AccessType {
 
     public static final String NO_ACCESS = "noaccess";

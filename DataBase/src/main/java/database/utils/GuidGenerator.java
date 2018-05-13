@@ -5,16 +5,32 @@ import database.model.storage.AIDS.GuidStorage;
 import java.time.LocalDate;
 import java.util.Random;
 
+/**
+ * Класс, предоставляющий инструменты для генерации глобальных идентификаторов
+ */
 public class GuidGenerator {
+
+    /**
+     * @see GuidStorage
+     */
     GuidStorage storage;
+
+    /**
+     * Дата создания глобального идентификатора
+     */
     LocalDate date;
 
     public GuidGenerator(){
         storage = GuidStorage.getInstance();
-        date = LocalDate.now();
     }
 
+    /**
+     * Метод, генерирующий новый глобальный идентификатор с проверкой на уникальность
+     * @return
+     */
     public long issueNewGUID(){
+        date = LocalDate.now();
+
         long res = 0;
 
         boolean isUnique = false;
@@ -27,7 +43,7 @@ public class GuidGenerator {
         return generateNext();
     }
 
-    long generateNext(){
+    private long generateNext(){
         Random r = new Random();
         return Long.parseLong("" + r.nextInt() + date.getDayOfMonth() + date.getMonthValue() + date.getYear());
     }
