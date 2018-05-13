@@ -7,6 +7,9 @@ import java.util.Iterator;
 
 public class DB {
     public static void main(String args[]) {
+        if(args.length == 1)
+            DBConstants.PORT = args[0];
+        
         DBProvider provider = new DBProvider(DBConstants.PORT);
 
         Iterator it = provider.getAllTables().iterator();
