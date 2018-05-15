@@ -30,9 +30,9 @@ public class UserSerializer implements Serializer <User> {
         try {
             writer.beginObject();
 
+            writer.name(Constants.GUID).value(src.GUID);
             writer.name(Constants.VERSION).value(src.version);
-            writer.name(Constants.VERSION_DESCRIPTION_ID).value(src.versionDescription.version_description_id);
-            writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription.description);
+            writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription);
 
             writer.name(Constants.NAME).value(src.name);
             writer.name(Constants.MIDDLE_NAME).value(src.middleName);
@@ -61,14 +61,14 @@ public class UserSerializer implements Serializer <User> {
             while (reader.hasNext()) {
                 String name = reader.nextName();
 
-                if (name.equals(Constants.VERSION)) {
+                if (name.equals(Constants.GUID)) {
+                    user.GUID = reader.nextLong();
+
+                } else if (name.equals(Constants.VERSION)) {
                     user.version = reader.nextString();
 
-                } else if (name.equals(Constants.VERSION_DESCRIPTION_ID)) {
-                    user.versionDescription.version_description_id = reader.nextLong();
-
                 } else if (name.equals(Constants.VERSION_DESCRIPTION)) {
-                    user.versionDescription.description = reader.nextString();
+                    user.versionDescription = reader.nextString();
 
                 } else if (name.equals(Constants.NAME)) {
                     user.name = reader.nextString();

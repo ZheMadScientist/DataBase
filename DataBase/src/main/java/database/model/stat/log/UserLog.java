@@ -27,7 +27,7 @@ public class UserLog extends database.model.Entity {
     }
 
     public UserLog(UserLog old) {
-        super(old.version, old.versionDescription.description);
+        super(old.version, old.versionDescription);
         this.logs = old.logs;
         this.user = old.user;
     }

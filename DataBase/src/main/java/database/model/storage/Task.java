@@ -28,7 +28,7 @@ public class Task extends Entity {
     public Task () {}
 
     public Task (Task old) {
-        super(old.version, old.versionDescription.description);
+        super(old.version, old.versionDescription);
         this.name = old.name;
         this.description = old.description;
         this.material = old.material;

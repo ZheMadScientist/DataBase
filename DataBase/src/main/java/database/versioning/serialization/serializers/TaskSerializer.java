@@ -30,9 +30,9 @@ public class TaskSerializer implements Serializer<Task> {
         try {
             writer.beginObject();
 
+            writer.name(Constants.GUID).value(src.GUID);
             writer.name(Constants.VERSION).value(src.version);
-            writer.name(Constants.VERSION_DESCRIPTION_ID).value(src.versionDescription.version_description_id);
-            writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription.description);
+            writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription);
 
             writer.name(Constants.NAME).value(src.name);
             writer.name(Constants.DESCRIPTION).value(src.description);
@@ -59,14 +59,14 @@ public class TaskSerializer implements Serializer<Task> {
             while (reader.hasNext()) {
                 String name = reader.nextName();
 
-                if (name.equals(Constants.VERSION)) {
+                if (name.equals(Constants.GUID)) {
+                    task.GUID = reader.nextLong();
+
+                } else if (name.equals(Constants.VERSION)) {
                     task.version = reader.nextString();
 
-                } else if (name.equals(Constants.VERSION_DESCRIPTION_ID)) {
-                    task.versionDescription.version_description_id = reader.nextLong();
-
                 } else if (name.equals(Constants.VERSION_DESCRIPTION)) {
-                    task.versionDescription.description = reader.nextString();
+                    task.versionDescription = reader.nextString();
 
                 } else if (name.equals(Constants.NAME)) {
                     task.name = reader.nextString();

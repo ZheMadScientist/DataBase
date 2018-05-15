@@ -1,12 +1,11 @@
 package database.model;
 
-import database.model.descriptors.VersionDescription;
 import lombok.Data;
 
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Класс, описывающий версию объекта
@@ -18,28 +17,27 @@ public class Version {
     @NotNull
     public String version;
 
-    // TODO: replace with String
-    @OneToOne
-    public VersionDescription versionDescription;
+
+    public String versionDescription;
 
     /**
      * Дата создания объекта
      */
-    public LocalDate date;
+    public String date;
 
     public Version(){
         version = "1";
-        versionDescription = new VersionDescription();
+        versionDescription = "";
         setDate();
     }
 
     public Version(String version, String description){
         this.version = version;
-        versionDescription = new VersionDescription(description);
+        versionDescription = description;
         setDate();
     }
 
     private void setDate(){
-        date = LocalDate.now();
+        date = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
     }
 }

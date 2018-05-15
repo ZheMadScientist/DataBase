@@ -12,8 +12,12 @@ import javax.persistence.OneToOne;
 @Data
 @javax.persistence.Entity
 public class Module extends Entity{
-    // TODO: refactor
 
+    public String name;
+
+    public String startDate;
+
+    public String endDate;
 
     @OneToOne
     public ModuleLog moduleLog;

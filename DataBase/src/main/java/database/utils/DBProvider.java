@@ -7,32 +7,31 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Класс, предоставляющий инструменты работы с бд посредством SQL запросов
+ */
 public class DBProvider {
-    private static String TYPE_INT = "int";
-    private static String TYPE_STRING = "String";
-    private static String TYPE_URL = "url";
-
     Connection c;
 
-    String port;
+    String url;
 
     private Logger log;
-
-    public DBProvider(String port) {
-        log = Logger.getLogger(DBProvider.class.getName());
-        this.port = port;
-    }
 
     private void connect(boolean isAutoCommit) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         c = DriverManager
-                .getConnection("jdbc:postgresql://localhost:" + port + "/EduProcessBank",
-                        "postgres",
-                        "qwerty");
+                .getConnection(url,
+                        DBConstants.USERNAME,
+                        DBConstants.PASSWORD);
         if(!isAutoCommit)
             c.setAutoCommit(false);
 
         log.log(Level.INFO, "Successfully connected to database ");
+    }
+
+    public DBProvider(String url) {
+        log = Logger.getLogger(DBProvider.class.getName());
+        this.url = url;
     }
 
     public List<String> getAllTables () {
@@ -65,43 +64,6 @@ public class DBProvider {
             statement.execute(sql);
             statement.close();
             c.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean executeUpdRawSQL(String sql) {
-        try {
-            connect(true);
-            Statement statement = c.createStatement();
-
-            statement.executeUpdate(sql);
-
-            statement.close();
-            c.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean insert(ArrayList<String> sql){
-        try {
-            connect(false);
-            Statement statement = c.createStatement();
-
-            for(String cmd : sql) {
-                statement.executeUpdate(cmd);
-            }
-
-            statement.close();
-            c.commit();
-            c.close();
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -147,87 +109,4 @@ public class DBProvider {
         return selected;
     }
 
-    //           <id in table, table's field>                       <field type , id in table>
-    public List< Pair <String, Object> > select (String from, List< Pair <String, String> > fields){
-        ArrayList< Pair <String, Object> > selected = new ArrayList<>();
-        try {
-            connect(false);
-            Statement statement = c.createStatement();
-
-            String query = "SELECT * FROM "
-                    + from + ";";
-
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
-                for( Pair <String, String> pair : fields){
-                    if(pair.first.equals(TYPE_INT)){
-                        selected.add(new Pair<>(pair.second, new Integer(resultSet.getInt(pair.second))));
-                    }
-                    else if(pair.first.equals(TYPE_STRING)){
-                        selected.add(new Pair<>(pair.second, resultSet.getString(pair.second)));
-                    }
-                    else if(pair.first.equals(TYPE_URL)){
-                        selected.add(new Pair<>(pair.second, resultSet.getURL(pair.second)));
-                    }
-                }
-            }
-
-            resultSet.close();
-            statement.close();
-            c.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return selected;
-    }
-
-    public boolean update(String from, String field, String value, String extra){
-        String cmd = "UPDATE " +
-                from +
-                " set " +
-                field.toUpperCase() +
-                " = " +
-                value;
-        if(!extra.equals(""))
-            cmd += " " + extra;
-
-        try {
-            connect(true);
-            Statement statement = c.createStatement();
-
-            statement.executeUpdate(cmd);
-
-            statement.close();
-            c.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean delete(String from, String sql){
-        String cmd = "DELETE from " +
-                from +
-                " " +
-                sql;
-
-        try {
-            connect(true);
-            Statement statement = c.createStatement();
-
-            statement.executeUpdate(cmd);
-
-            statement.close();
-            c.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
 }

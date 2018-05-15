@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс, представляющий оболочку {@link Token} для хранения набора токенов, соответствующих нескольким лексемам
+ * Класс, представляющий оболочку {@link Token} для хранения набора токенов,<br> соответствующих нескольким лексемам
  */
 public class TokensWrapper implements Serializable{
 

@@ -21,7 +21,7 @@ public class Versions extends Entity {
     public long entity_id;
 
     /**
-     * Объект класса, хранящего "разность" между предыдущей и последней версией
+     * Объект класса, хранящего "разность" между предыдущей<br> и последней версией
      * версионируемого объекта
      * @see TokensWrapper
      */
@@ -38,11 +38,11 @@ public class Versions extends Entity {
      * Дата создания сохраняемого объекта
      */
     @NonNull
-    public LocalDate date;
+    public String date;
 
     public Versions (){}
 
-    public Versions(long guid, TokensWrapper tokensWrapper, String version, LocalDate date){
+    public Versions(long guid, TokensWrapper tokensWrapper, String version, String date){
         this.entity_id = guid;
         this.date = date;
         this.tokensWrapper = tokensWrapper;

@@ -11,8 +11,6 @@ import javax.persistence.Id;
 /**
  * Класс, хранящий права доступа для пользователя
  */
-
-// TODO: refactor
 @Data
 @Entity
 public class Access {
@@ -23,7 +21,31 @@ public class Access {
 
     public String courseState;
 
+    public String content;
+
+    public String material;
+
+    public String task;
+
+    public String step;
+
+    public String testStep;
+
+    public String assigmentStep;
+
+    public String key;
+
+    public String users;
+
     public Access(){
         courseState = AccessType.RD_ONLY;
+        content = AccessType.RD_ONLY;
+        material = AccessType.RD_ONLY;
+        task = AccessType.RD_ONLY;
+        step = AccessType.RD_ONLY;
+        testStep = AccessType.RD_ONLY;
+        assigmentStep = AccessType.RD_ONLY;
+        key = AccessType.RD_ONLY;
+        users = AccessType.RD_ONLY;
     }
 }

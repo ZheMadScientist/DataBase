@@ -24,7 +24,7 @@ public class CourseLog extends database.model.Entity {
     public CourseLog () {}
 
     public CourseLog (CourseLog old) {
-        super(old.version, old.versionDescription.description);
+        super(old.version, old.versionDescription);
         this.course = old.course;
         this.logs = old.logs;
     }

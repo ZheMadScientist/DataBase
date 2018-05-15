@@ -6,27 +6,24 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * Точка входа для приложения
+ */
 @SpringBootApplication
 @ComponentScan
 @EnableAutoConfiguration
 public class Main {
 
     public static void main(String[] args) {
-        if(args.length == 3){
+        if(args.length == 5){
             System.setProperty("spring.datasource.url", args[0]);
             System.setProperty("spring.datasource.username", args[1]);
             System.setProperty("spring.datasource.password", args[2]);
+            System.setProperty("server.port", args[3]);
 
-            StringBuilder port = new StringBuilder();
-            for(int i = 0; i < args[0].length(); ++i){
-                if(args[0].charAt(i) == ':' && args[0].charAt(i + 1) != '/')
-                    while (args[0].charAt(i) != '/'){
-                        port.append(args[0].charAt(i + 1));
-                        ++i;
-                    }
-            }
-
-            //DBConstants.PORT = port.toString();
+            DBConstants.URL = args[0];
+            DBConstants.USERNAME = args[1];
+            DBConstants.PASSWORD = args[2];
 
         } else {
             System.out.println("Running with default settings");

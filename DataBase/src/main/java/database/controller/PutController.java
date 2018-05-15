@@ -6,6 +6,7 @@ import database.model.stat.log.UserLog;
 import database.model.step.AssigmentStep;
 import database.model.step.Step;
 import database.model.step.TestStep;
+import database.model.storage.Content;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.model.user.User;
@@ -17,6 +18,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+/**
+ * Контроллер, отвечающий на put запросы
+ */
 @CrossOrigin
 @Transactional
 @RestController
@@ -61,6 +65,24 @@ public class PutController {
         em.flush();
 
         return task;
+    }
+
+    @ResponseStatus(value = HttpStatus.OK)
+    @RequestMapping(value = "/content", method = RequestMethod.PUT)
+    public Content putContent(@RequestBody Content content) {
+
+        content = new Content(content);
+
+        Content instance = em.find(Content.class, content.GUID);
+
+        if (instance != null)
+            em.remove(instance);
+
+        em.persist(content);
+
+        em.flush();
+
+        return content;
     }
 
     @ResponseStatus(value = HttpStatus.OK)

@@ -22,7 +22,7 @@ public class GuidStorage {
 
 
     GuidStorage(){
-        guids = new DBProvider(DBConstants.PORT).getAllId();
+        guids = new DBProvider(DBConstants.URL).getAllId();
     }
 
     /**

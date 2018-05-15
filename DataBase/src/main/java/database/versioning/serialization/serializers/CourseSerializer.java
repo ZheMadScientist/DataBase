@@ -33,18 +33,17 @@ public class CourseSerializer implements Serializer <Course> {
         try {
             writer.beginObject();
 
+            writer.name(Constants.GUID).value(src.GUID);
             writer.name(Constants.VERSION).value(src.version);
-            writer.name(Constants.VERSION_DESCRIPTION_ID).value(src.versionDescription.version_description_id);
-            writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription.description);
+            writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription);
 
             writer.name(Constants.NAME).value(src.courseName);
             writer.name(Constants.DESCRIPTION).value(src.courseDescription);
 
-            writer.beginObject();
+            writer.name(Constants.ENTRY).beginObject();
 
             writer.name(Constants.INNER_VERSION).value(src.courseState.version);
-            writer.name(Constants.INNER_VERSION_DESCRIPTION_ID).value(src.courseState.versionDescription.version_description_id);
-            writer.name(Constants.INNER_VERSION_DESCRIPTION).value(src.courseState.versionDescription.description);
+            writer.name(Constants.INNER_VERSION_DESCRIPTION).value(src.courseState.versionDescription);
 
             writer.name(Constants.INNER_ENTITY_ID).value(src.courseState.GUID);
 
@@ -87,14 +86,14 @@ public class CourseSerializer implements Serializer <Course> {
             while (reader.hasNext()) {
                 String name = reader.nextName();
 
-                if (name.equals(Constants.VERSION)) {
+                if (name.equals(Constants.GUID)) {
+                    course.GUID = reader.nextLong();
+
+                } else if (name.equals(Constants.VERSION)) {
                     course.version = reader.nextString();
 
-                } else if (name.equals(Constants.VERSION_DESCRIPTION_ID)) {
-                    course.versionDescription.version_description_id = reader.nextLong();
-
                 } else if (name.equals(Constants.VERSION_DESCRIPTION)) {
-                    course.versionDescription.description = reader.nextString();
+                    course.versionDescription = reader.nextString();
 
                 } else if (name.equals(Constants.NAME)) {
                     course.courseName = reader.nextString();
@@ -102,15 +101,14 @@ public class CourseSerializer implements Serializer <Course> {
                 } else if (name.equals(Constants.DESCRIPTION)) {
                     course.courseDescription = reader.nextString();
 
-                } else if (name.equals(Constants.INNER_VERSION)) {
+                } else if (name.equals(Constants.ENTRY)) {
                     reader.beginObject();
+
+                } else if (name.equals(Constants.INNER_VERSION)) {
                     course.courseState.version = reader.nextString();
 
-                } else if (name.equals(Constants.INNER_VERSION_DESCRIPTION_ID)) {
-                    course.courseState.versionDescription.version_description_id = reader.nextLong();
-
                 } else if (name.equals(Constants.INNER_VERSION_DESCRIPTION)) {
-                    course.courseState.versionDescription.description = reader.nextString();
+                    course.courseState.versionDescription = reader.nextString();
 
                 } else if (name.equals(Constants.INNER_ENTITY_ID)) {
                     course.courseState.GUID = reader.nextLong();

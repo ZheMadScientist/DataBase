@@ -5,7 +5,6 @@ database.dbtools
 database.model
 database.model.constants
 database.model.course
-database.model.descriptors
 database.model.enums.thesaurus
 database.model.intervention
 database.model.stat

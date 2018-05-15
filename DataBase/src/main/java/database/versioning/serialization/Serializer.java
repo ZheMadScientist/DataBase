@@ -5,7 +5,7 @@ import database.model.Entity;
 import javax.persistence.EntityManager;
 
 /**
- * Интерфейс для сериализации и десериализации объектов в JSON.
+ * Интерфейс для сериализации и десериализации объектов в JSON.<br>
  * Реализации интерфейса используют библиотеку Gson
  * @param <T> класс, унследованный от Entity
  */

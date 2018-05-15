@@ -34,7 +34,7 @@ public class Course extends Entity {
     public Course () {}
 
     public Course (Course old) {
-        super(old.version, old.versionDescription.description);
+        super(old.version, old.versionDescription);
         this.courseName = old.courseName;
         this.courseDescription = old.courseDescription;
         this.courseState = old.courseState;

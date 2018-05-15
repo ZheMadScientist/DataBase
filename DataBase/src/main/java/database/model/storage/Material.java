@@ -25,7 +25,7 @@ public class Material extends database.model.Entity {
     public Material(){}
 
     public Material(Material another){
-        super(another.version, another.versionDescription.description);
+        super(another.version, another.versionDescription);
         this.name = another.name;
         this.description = another.description;
         this.content = new Content(another.content);

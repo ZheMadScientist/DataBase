@@ -7,6 +7,7 @@ import database.model.stat.log.UserLog;
 import database.model.step.AssigmentStep;
 import database.model.step.Step;
 import database.model.step.TestStep;
+import database.model.storage.Content;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.model.user.User;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/**
+ * Контроллер, отвечающий на get запросы
+ */
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/get")
@@ -26,7 +30,7 @@ public class GetController {
 
     VController versionController = new VController();
 
-    /**
+    /*
      * CONTENT
      */
 
@@ -35,7 +39,7 @@ public class GetController {
                              @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(Material.class, id), Material.class, version);
+            return versionController.getOlder(em.find(Material.class, id), Material.class, version, em);
 
         return em.find(Material.class, id);
     }
@@ -45,16 +49,26 @@ public class GetController {
                       @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(Task.class, id), Task.class, version);
+            return versionController.getOlder(em.find(Task.class, id), Task.class, version, em);
 
         return em.find(Task.class, id);
     }
 
-    /**
+    @RequestMapping(value = "/content", method = RequestMethod.GET )
+    public Content content (@RequestParam(value="id", required = true, defaultValue = "1") long id,
+                         @RequestParam(value="version", required = false, defaultValue = "") String version) {
+
+        if(!version.equals(""))
+            return versionController.getOlder(em.find(Content.class, id), Content.class, version, em);
+
+        return em.find(Content.class, id);
+    }
+
+    /*
      * EOF CONTENT
      */
 
-    /**
+    /*
      * USERS
      */
 
@@ -63,7 +77,7 @@ public class GetController {
                       @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(User.class, id), User.class, version);
+            return versionController.getOlder(em.find(User.class, id), User.class, version, em);
 
         return em.find(User.class, id);
     }
@@ -73,16 +87,16 @@ public class GetController {
                             @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(UserLog.class, id), UserLog.class, version);
+            return versionController.getOlder(em.find(UserLog.class, id), UserLog.class, version, em);
 
         return em.find(UserLog.class, id);
     }
 
-    /**
+    /*
      * EOF USERS
      */
 
-    /**
+    /*
      * COURSE
      */
 
@@ -91,7 +105,7 @@ public class GetController {
                           @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(Course.class, id), Course.class, version);
+            return versionController.getOlder(em.find(Course.class, id), Course.class, version, em);
 
         return em.find(Course.class, id);
     }
@@ -101,16 +115,16 @@ public class GetController {
                                 @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(CourseLog.class, id), CourseLog.class, version);
+            return versionController.getOlder(em.find(CourseLog.class, id), CourseLog.class, version, em);
 
         return em.find(CourseLog.class, id);
     }
 
-    /**
+    /*
      * EOF COURSE
      */
 
-    /**
+    /*
      * STEPS
      */
 
@@ -119,7 +133,7 @@ public class GetController {
                       @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(Step.class, id), Step.class, version);
+            return versionController.getOlder(em.find(Step.class, id), Step.class, version, em);
 
         return em.find(Step.class, id);
     }
@@ -129,7 +143,7 @@ public class GetController {
                               @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(TestStep.class, id), TestStep.class, version);
+            return versionController.getOlder(em.find(TestStep.class, id), TestStep.class, version, em);
 
         return em.find(TestStep.class, id);
     }
@@ -139,12 +153,12 @@ public class GetController {
                                         @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
         if(!version.equals(""))
-            return versionController.getOlder(em.find(AssigmentStep.class, id), AssigmentStep.class, version);
+            return versionController.getOlder(em.find(AssigmentStep.class, id), AssigmentStep.class, version, em);
 
         return em.find(AssigmentStep.class, id);
     }
 
-    /**
+    /*
      * EOF STEPS
      */
 }

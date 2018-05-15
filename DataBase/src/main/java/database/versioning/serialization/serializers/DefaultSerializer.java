@@ -7,7 +7,7 @@ import database.versioning.serialization.Serializer;
 import javax.persistence.EntityManager;
 
 /**
- * Дефолтная реализация интерфейса {@link Serializer}, использующая class mapping
+ * Дефолтная реализация интерфейса {@link Serializer}, использующая class mapping<br>
  * для сериализации классов, наследующихся от {@link Entity}
  * */
 public class DefaultSerializer<T extends Entity> implements Serializer<T> {

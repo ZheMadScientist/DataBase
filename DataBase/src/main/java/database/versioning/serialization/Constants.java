@@ -4,6 +4,7 @@ package database.versioning.serialization;
  * Класс, содержащий константы, необходимые для сериализации/десериализации
  */
 public class Constants {
+    public static final String GUID = "guid";
     public static final String VERSION = "version";
     public static final String VERSION_DESCRIPTION_ID = "versionDescription_id";
     public static final String VERSION_DESCRIPTION = "versionDescription";
@@ -26,6 +27,7 @@ public class Constants {
 
     public static final String CONTENT_ID = "content_id";
     public static final String CONTENT = "content";
+    public static final String ENTRY = "entry";
 
     public static final String MATERIAL_ID = "material_id";
 }
