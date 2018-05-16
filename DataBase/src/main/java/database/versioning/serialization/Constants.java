@@ -29,5 +29,12 @@ public class Constants {
     public static final String CONTENT = "content";
     public static final String ENTRY = "entry";
 
+    public static final String REQUEST_INFO_ENTRY = "request_info_entry";
+    public static final String REQUEST_INFO_ONTOLOGY_LINK = "request_info_ontology_link";
+    public static final String REQUEST_INFO_LINKS = "request_info_links";
+    public static final String REQUEST_INFO_ATRRS = "request_info_attrs";
+    public static final String REQUEST_INFO_GEN_PARAMS = "request_info_gen_params";
+    public static final String REQUEST_INFO_END = "request_info_end";
+
     public static final String MATERIAL_ID = "material_id";
 }

@@ -3,6 +3,7 @@ package database.versioning.serialization.serializers;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import database.model.Entity;
+import database.model.RequestInfo;
 import database.model.storage.Content;
 import database.model.storage.Material;
 import database.versioning.serialization.Constants;
@@ -29,6 +30,36 @@ public class MaterialSerializer implements Serializer<Material> {
 
         try {
             writer.beginObject();
+
+            writer.name(Constants.REQUEST_INFO_ENTRY).beginObject();
+
+            if(src.requestInfo.links != null) {
+                writer.name(Constants.REQUEST_INFO_LINKS).beginArray();
+
+                for (long id : src.requestInfo.links)
+                    writer.value(id);
+                writer.endArray();
+            }
+
+            if(src.requestInfo.generation_params != null) {
+                writer.name(Constants.REQUEST_INFO_GEN_PARAMS).beginArray();
+
+                for (String tmp : src.requestInfo.generation_params)
+                    writer.value(tmp);
+                writer.endArray();
+            }
+
+            if(src.requestInfo.attributes != null) {
+                writer.name(Constants.REQUEST_INFO_ATRRS).beginArray();
+
+                for (String tmp : src.requestInfo.attributes)
+                    writer.value(tmp);
+                writer.endArray();
+            }
+
+            writer.name(Constants.REQUEST_INFO_ONTOLOGY_LINK).value(src.requestInfo.ontology_link);
+
+            writer.endObject();
 
             writer.name(Constants.GUID).value(src.GUID);
             writer.name(Constants.VERSION).value(src.version);
@@ -62,6 +93,8 @@ public class MaterialSerializer implements Serializer<Material> {
     public Material deserialize(String src, EntityManager em) {
         Material material = new Material();
         material.content = new Content();
+        material.requestInfo = new RequestInfo();
+
         JsonReader reader = new JsonReader(new StringReader(src));
 
         try {
@@ -70,7 +103,32 @@ public class MaterialSerializer implements Serializer<Material> {
             while (reader.hasNext()) {
                 String name = reader.nextName();
 
-                if (name.equals(Constants.GUID)) {
+                if(name.equals(Constants.REQUEST_INFO_ENTRY)) {
+                    reader.beginObject();
+
+                } else if(name.equals(Constants.REQUEST_INFO_ONTOLOGY_LINK)){
+                    material.requestInfo.ontology_link = reader.nextLong();
+                    reader.endObject();
+
+                } else if (name.equals(Constants.REQUEST_INFO_LINKS)) {
+                    reader.beginArray();
+                    while (reader.hasNext())
+                        material.requestInfo.links.add(reader.nextLong());
+                    reader.endArray();
+
+                } else if (name.equals(Constants.REQUEST_INFO_GEN_PARAMS)) {
+                    reader.beginArray();
+                    while (reader.hasNext())
+                        material.requestInfo.generation_params.add(reader.nextString());
+                    reader.endArray();
+
+                } else if (name.equals(Constants.REQUEST_INFO_ATRRS)) {
+                    reader.beginArray();
+                    while (reader.hasNext())
+                        material.requestInfo.generation_params.add(reader.nextString());
+                    reader.endArray();
+
+                } else if (name.equals(Constants.GUID)) {
                     material.GUID = reader.nextLong();
 
                 } else if (name.equals(Constants.VERSION)) {

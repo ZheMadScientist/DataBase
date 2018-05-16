@@ -1,15 +1,16 @@
 package database.model.storage;
 
+import database.model.RequestInfo;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Класс, описывающий материал
  */
 @Data
 @Entity
-@Table( indexes = { @Index ( name = "material_index",  columnList="name,description", unique = true ) } )
 public class Material extends database.model.Entity {
 
     public String name;
@@ -22,6 +23,8 @@ public class Material extends database.model.Entity {
     @ManyToOne
     public Content content;
 
+    public RequestInfo requestInfo;
+
     public Material(){}
 
     public Material(Material another){
@@ -29,6 +32,7 @@ public class Material extends database.model.Entity {
         this.name = another.name;
         this.description = another.description;
         this.content = new Content(another.content);
+        this.requestInfo = another.requestInfo;
     }
 
 }

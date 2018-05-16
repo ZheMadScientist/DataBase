@@ -8,8 +8,6 @@ import database.versioning.serialization.SerializerFactory;
 import database.versioning.tools.VersioningUtils;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import java.util.Comparator;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class VController {
         if(!GuidStorage.getInstance().contains(newInstance.GUID) || old == null)
             return;
 
-        Serializer serializer = new SerializerFactory().getSerializer(c);
+        Serializer serializer = new SerializerFactory().getSerializer(Entity.class);
 
         String oldJSON = serializer.serialize(old);
         String newJSON = serializer.serialize(newInstance);
@@ -89,7 +87,7 @@ public class VController {
         String tmp = serializer.serialize(latest);
 
         for(int i = 0; i < depth; ++i)
-            tmp = VersioningUtils.recoverFromWrapper(tmp.split(";"), versions.get(i).tokensWrapper);
+            tmp = VersioningUtils.recoverFromWrapper(tmp.split(","), versions.get(i).tokensWrapper);
 
         T res = serializer.deserialize(tmp, em);
 

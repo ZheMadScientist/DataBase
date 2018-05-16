@@ -27,7 +27,17 @@ public class Main {
 
         } else {
             System.out.println("Running with default settings");
+            System.setProperty("spring.datasource.url", "jdbc:postgresql://localhost:5432/EduProcessBank");
+            System.setProperty("spring.datasource.username", "postgres");
+            System.setProperty("spring.datasource.password", "qwerty");
         }
+
+        System.setProperty("spring.jpa.database-platform", "org.hibernate.dialect.PostgreSQLDialect");
+        System.setProperty("spring.jpa.hibernate.ddl-auto", "update");
+        System.setProperty("liquibase.change-log", "classpath:db/liquibase-changelog.xml");
+        System.setProperty("spring.datasource.driverClassName", "org.postgresql.Driver");
+        System.setProperty("hibernate.cache.use_second_level_cache", "false");
+
         SpringApplication.run(Main.class, args);
 
     }

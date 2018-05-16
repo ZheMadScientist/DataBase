@@ -1,18 +1,16 @@
 package database.model.storage;
 
 import database.model.Entity;
+import database.model.RequestInfo;
 import lombok.Data;
 
-import javax.persistence.Index;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * Класс, описывающий "задание"
  */
 @Data
 @javax.persistence.Entity
-@Table( indexes = { @Index( name = "task_index",  columnList="name,description", unique = false ) } )
 public class Task extends Entity {
 
     public String name;
@@ -25,6 +23,8 @@ public class Task extends Entity {
     @ManyToOne
     public Material material;
 
+    public RequestInfo requestInfo;
+
     public Task () {}
 
     public Task (Task old) {
@@ -32,5 +32,6 @@ public class Task extends Entity {
         this.name = old.name;
         this.description = old.description;
         this.material = old.material;
+        this.requestInfo = old.requestInfo;
     }
 }

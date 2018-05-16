@@ -5,8 +5,6 @@ import database.versioning.model.TokensWrapper;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.time.LocalDate;
-
 /**
  * Класс для хранения версий объектов
  */

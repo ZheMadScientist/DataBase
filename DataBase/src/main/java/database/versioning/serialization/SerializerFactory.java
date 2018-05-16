@@ -2,7 +2,6 @@ package database.versioning.serialization;
 
 import database.model.Entity;
 import database.model.course.Course;
-import database.model.storage.Content;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.model.user.User;

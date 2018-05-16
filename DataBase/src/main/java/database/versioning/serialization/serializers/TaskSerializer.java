@@ -3,6 +3,7 @@ package database.versioning.serialization.serializers;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import database.model.Entity;
+import database.model.RequestInfo;
 import database.model.storage.Material;
 import database.model.storage.Task;
 import database.versioning.serialization.Constants;
@@ -30,6 +31,36 @@ public class TaskSerializer implements Serializer<Task> {
         try {
             writer.beginObject();
 
+            writer.name(Constants.REQUEST_INFO_ENTRY).beginObject();
+
+            writer.name(Constants.REQUEST_INFO_ONTOLOGY_LINK).value(src.requestInfo.ontology_link);
+
+            if(src.requestInfo.links != null) {
+                writer.name(Constants.REQUEST_INFO_LINKS).beginArray();
+
+                for (long id : src.requestInfo.links)
+                    writer.value(id);
+                writer.endArray();
+            }
+
+            if(src.requestInfo.generation_params != null) {
+                writer.name(Constants.REQUEST_INFO_GEN_PARAMS).beginArray();
+
+                for (String tmp : src.requestInfo.generation_params)
+                    writer.value(tmp);
+                writer.endArray();
+            }
+
+
+            if(src.requestInfo.attributes != null) {
+                writer.name(Constants.REQUEST_INFO_ATRRS).beginArray();
+
+                for (String tmp : src.requestInfo.attributes)
+                    writer.value(tmp);
+                writer.endArray();
+            }
+            writer.name(Constants.REQUEST_INFO_END).endObject();
+
             writer.name(Constants.GUID).value(src.GUID);
             writer.name(Constants.VERSION).value(src.version);
             writer.name(Constants.VERSION_DESCRIPTION).value(src.versionDescription);
@@ -51,6 +82,9 @@ public class TaskSerializer implements Serializer<Task> {
     @Override
     public Task deserialize(String src, EntityManager em) {
         Task task = new Task();
+        task.material = new Material();
+        task.requestInfo = new RequestInfo();
+
         JsonReader reader = new JsonReader(new StringReader(src));
 
         try {
@@ -59,7 +93,34 @@ public class TaskSerializer implements Serializer<Task> {
             while (reader.hasNext()) {
                 String name = reader.nextName();
 
-                if (name.equals(Constants.GUID)) {
+                if(name.equals(Constants.REQUEST_INFO_ENTRY)) {
+                    reader.beginObject();
+
+                } else if(name.equals(Constants.REQUEST_INFO_ONTOLOGY_LINK)){
+                    task.requestInfo.ontology_link = reader.nextLong();
+
+                } else if (name.equals(Constants.REQUEST_INFO_LINKS)) {
+                    reader.beginArray();
+                    while (reader.hasNext())
+                        task.requestInfo.links.add(reader.nextLong());
+                    reader.endArray();
+
+                } else if (name.equals(Constants.REQUEST_INFO_GEN_PARAMS)) {
+                    reader.beginArray();
+                    while (reader.hasNext())
+                        task.requestInfo.generation_params.add(reader.nextString());
+                    reader.endArray();
+
+                } else if (name.equals(Constants.REQUEST_INFO_ATRRS)) {
+                    reader.beginArray();
+                    while (reader.hasNext())
+                        task.requestInfo.generation_params.add(reader.nextString());
+                    reader.endArray();
+
+                } else if (name.equals(Constants.REQUEST_INFO_END)) {
+                    reader.endObject();
+
+                } else if (name.equals(Constants.GUID)) {
                     task.GUID = reader.nextLong();
 
                 } else if (name.equals(Constants.VERSION)) {
