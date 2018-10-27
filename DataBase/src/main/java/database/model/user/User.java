@@ -24,6 +24,10 @@ public class User extends database.model.Entity {
     @Basic
     public String lastName;
 
+    public int age;
+
+    public String gender = "";
+
     /**
      * Объект, хранящий активность (логи) пользователя
      */

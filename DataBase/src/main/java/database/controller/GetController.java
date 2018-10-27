@@ -9,13 +9,18 @@ import database.model.step.Step;
 import database.model.step.TestStep;
 import database.model.storage.Content;
 import database.model.storage.Material;
+import database.model.storage.Review;
 import database.model.storage.Task;
+import database.model.tagging.Tags;
 import database.model.user.User;
 import database.versioning.VController;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Контроллер, отвечающий на get запросы
@@ -28,7 +33,7 @@ public class GetController {
     @PersistenceContext
     private EntityManager em;
 
-    VController versionController = new VController();
+    private VController versionController = new VController();
 
     /*
      * CONTENT
@@ -80,6 +85,20 @@ public class GetController {
             return versionController.getOlder(em.find(User.class, id), User.class, version, em);
 
         return em.find(User.class, id);
+    }
+
+    @RequestMapping(value = "/default_user", method = RequestMethod.GET)
+    public User getDefaultuser () {
+
+        User user = new User();
+
+        user.age = 22;
+        user.gender = "ZH";
+        user.lastName = "Andreeva";
+        user.middleName = "";
+        user.name = "Varya";
+
+        return user;
     }
 
     @RequestMapping(value = "/userLog", method = RequestMethod.GET)
@@ -160,5 +179,40 @@ public class GetController {
 
     /*
      * EOF STEPS
+     */
+
+    /*
+     * REVIEWS
+     */
+
+    @RequestMapping(value = "/review", method = RequestMethod.GET)
+    public Review review (User user,
+                          Tags tags,
+                          @RequestParam(value = "from", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate fromDate,
+                          @RequestParam(value = "to", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate toDate,
+                          @RequestParam(value="version", required = false, defaultValue = "") String version) {
+
+        String query = "from Review ";
+
+        if(fromDate != null || toDate != null) {
+
+            if(fromDate == null)
+                fromDate = LocalDate.MIN;
+
+            if(toDate == null)
+                toDate = LocalDate.MAX;
+
+            query += "where (date > fromDate and date < toDate";
+        }
+
+        
+
+        em.createQuery(query);
+
+        return new Review();
+    }
+
+    /*
+     * EOF REVIEWS
      */
 }
