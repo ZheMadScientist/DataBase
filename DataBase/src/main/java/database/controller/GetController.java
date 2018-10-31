@@ -1,18 +1,11 @@
 package database.controller;
 
 
-import database.model.course.Course;
-import database.model.stat.log.CourseLog;
-import database.model.stat.log.UserLog;
-import database.model.step.AssigmentStep;
-import database.model.step.Step;
-import database.model.step.TestStep;
-import database.model.storage.Content;
 import database.model.storage.Material;
 import database.model.storage.Review;
-import database.model.storage.Task;
 import database.model.tagging.Tags;
 import database.model.user.User;
+import database.versioning.AllVersions;
 import database.versioning.VController;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Контроллер, отвечающий на get запросы
@@ -39,34 +31,23 @@ public class GetController {
      * CONTENT
      */
 
+    /**
+     * Метод для получения Материала по параметрам
+     * @param name - наименование, обязательный параметр
+     * @param description - описание
+     * @param version - требуемая версия
+     * @return {@link Material}
+     */
     @RequestMapping(value = "/material", method = RequestMethod.GET)
-    public Material material(@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                             @RequestParam(value="version", required = false, defaultValue = "") String version) {
+    public Material material(@RequestParam(value="name") String name,
+                             @RequestParam(value="description", required = false) String description,
+                             @RequestParam(value="version", required = false, defaultValue = "1") String version) {
 
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(Material.class, id), Material.class, version, em);
+        //if(!version.equals(""))
+            //return versionController.getOlder(em.find(Material.class, id), Material.class, version, em);
 
-        return em.find(Material.class, id);
-    }
-
-    @RequestMapping(value = "/task", method = RequestMethod.GET )
-    public Task task (@RequestParam(value="id", required = true, defaultValue = "1") long id,
-                      @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(Task.class, id), Task.class, version, em);
-
-        return em.find(Task.class, id);
-    }
-
-    @RequestMapping(value = "/content", method = RequestMethod.GET )
-    public Content content (@RequestParam(value="id", required = true, defaultValue = "1") long id,
-                         @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(Content.class, id), Content.class, version, em);
-
-        return em.find(Content.class, id);
+        //return em.find(Material.class, id);
+        return new Material();
     }
 
     /*
@@ -77,120 +58,52 @@ public class GetController {
      * USERS
      */
 
+    /**
+     * Метод для получения юзера по параметрам
+     * @param name - имя, обязательный параметр
+     * @param midName - отчество
+     * @param lastName - фамилия
+     * @param age - возраст
+     * @param gender - пол (male / female)
+     * @return {@link User}
+     */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public User user (@RequestParam(value="id", required = true, defaultValue = "1") long id,
-                      @RequestParam(value="version", required = false, defaultValue = "") String version) {
+    public User user (@RequestParam(value="name") String name,
+                      @RequestParam(value="mid_name", required = false) String midName,
+                      @RequestParam(value="last_name", required = false) String lastName,
+                      @RequestParam(value="age", required = false) int age,
+                      @RequestParam(value="gender", required = false) String gender) {
 
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(User.class, id), User.class, version, em);
 
-        return em.find(User.class, id);
-    }
-
-    @RequestMapping(value = "/default_user", method = RequestMethod.GET)
-    public User getDefaultuser () {
-
-        User user = new User();
-
-        user.age = 22;
-        user.gender = "ZH";
-        user.lastName = "Andreeva";
-        user.middleName = "";
-        user.name = "Varya";
-
-        return user;
-    }
-
-    @RequestMapping(value = "/userLog", method = RequestMethod.GET)
-    public UserLog userLog (@RequestParam(value="id", defaultValue = "1") long id,
-                            @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(UserLog.class, id), UserLog.class, version, em);
-
-        return em.find(UserLog.class, id);
+        return new User();
     }
 
     /*
      * EOF USERS
      */
 
-    /*
-     * COURSE
-     */
-
-    @RequestMapping(value = "/course", method = RequestMethod.GET)
-    public Course course (@RequestParam(value="id", defaultValue = "1") long id,
-                          @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(Course.class, id), Course.class, version, em);
-
-        return em.find(Course.class, id);
-    }
-
-    @RequestMapping(value = "/courseLog", method = RequestMethod.GET)
-    public CourseLog courseLog (@RequestParam(value="id", defaultValue = "1") long id,
-                                @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(CourseLog.class, id), CourseLog.class, version, em);
-
-        return em.find(CourseLog.class, id);
-    }
-
-    /*
-     * EOF COURSE
-     */
-
-    /*
-     * STEPS
-     */
-
-    @RequestMapping(value = "/step", method = RequestMethod.GET)
-    public Step step (@RequestParam(value="id", defaultValue = "1") long id,
-                      @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(Step.class, id), Step.class, version, em);
-
-        return em.find(Step.class, id);
-    }
-
-    @RequestMapping(value = "/testStep", method = RequestMethod.GET)
-    public TestStep testStep (@RequestParam(value="id", defaultValue = "1") long id,
-                              @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(TestStep.class, id), TestStep.class, version, em);
-
-        return em.find(TestStep.class, id);
-    }
-
-    @RequestMapping(value = "/assigmentStep", method = RequestMethod.GET)
-    public AssigmentStep assigmentStep (@RequestParam(value="id", defaultValue = "1") long id,
-                                        @RequestParam(value="version", required = false, defaultValue = "") String version) {
-
-        if(!version.equals(""))
-            return versionController.getOlder(em.find(AssigmentStep.class, id), AssigmentStep.class, version, em);
-
-        return em.find(AssigmentStep.class, id);
-    }
-
-    /*
-     * EOF STEPS
-     */
 
     /*
      * REVIEWS
      */
 
+    /**
+     * Метод для получения объекта {@link Review} <br> Все параметры могут быть {@code null} или неполными объектами. <br>
+     *     Например, {@link User} может иметь только {@code User.name} <br>
+     *         Но хотя бы один параметр должен быть ненулевым
+     * @param user - юзер, которому принадлжеит отзыв
+     * @param tags - набор тэгов для поиска отзыва
+     * @param fromDate - начальная дата для фильтрации отзывов
+     * @param toDate - конечная дата для фильтрации отзывов
+     * @param version - имя нужной версии отзыва
+     * @return {@link Review}
+     */
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     public Review review (User user,
                           Tags tags,
                           @RequestParam(value = "from", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate fromDate,
                           @RequestParam(value = "to", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate toDate,
-                          @RequestParam(value="version", required = false, defaultValue = "") String version) {
+                          @RequestParam(value="version", required = false, defaultValue = "1") String version) {
 
         String query = "from Review ";
 
@@ -214,5 +127,26 @@ public class GetController {
 
     /*
      * EOF REVIEWS
+     */
+
+    /*
+     * VERSIONS
+     */
+
+    /**
+     * Метод для получения имен и описаний всех версий сущности
+     * @param id - guid сущности
+     * @return имена всех сохраненных в бд версий
+     * @see AllVersions
+     */
+    @RequestMapping(value = "/get_all_versions", method = RequestMethod.GET)
+    public AllVersions getAllMaterialVersions (@RequestParam(value="id") int id) {
+
+
+        return new AllVersions();
+    }
+
+    /*
+     * EOF VERSIONS
      */
 }
