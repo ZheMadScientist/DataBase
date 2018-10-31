@@ -38,4 +38,8 @@ public class Review extends Entity {
         date = LocalDate.now();
     }
 
+    public Review (Review old) {
+        // TODO: implement
+    }
+
 }

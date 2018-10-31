@@ -33,6 +33,7 @@ public class GetController {
 
     /**
      * Метод для получения Материала по параметрам
+     * Пример запроса: url / get / material ? name = {} & description = {} & version = 1
      * @param name - наименование, обязательный параметр
      * @param description - описание
      * @param version - требуемая версия
