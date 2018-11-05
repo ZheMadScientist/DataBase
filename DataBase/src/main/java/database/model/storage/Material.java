@@ -1,10 +1,11 @@
 package database.model.storage;
 
-import database.model.RequestInfo;
+import database.model.tagging.Tags;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Класс, описывающий материал
@@ -23,7 +24,8 @@ public class Material extends database.model.Entity {
     @ManyToOne
     public Content content;
 
-    public RequestInfo requestInfo;
+    @OneToOne
+    public Tags tags;
 
     public Material(){}
 
@@ -32,7 +34,7 @@ public class Material extends database.model.Entity {
         this.name = another.name;
         this.description = another.description;
         this.content = new Content(another.content);
-        this.requestInfo = another.requestInfo;
+        this.tags = another.tags;
     }
 
 }

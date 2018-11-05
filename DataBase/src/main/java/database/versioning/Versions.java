@@ -33,6 +33,12 @@ public class Versions extends Entity {
     public String version;
 
     /**
+     * Описание версии сохраняемого объекта
+     */
+    @NonNull
+    public String versionDescription;
+
+    /**
      * Дата создания сохраняемого объекта
      */
     @NonNull
@@ -40,11 +46,12 @@ public class Versions extends Entity {
 
     public Versions (){}
 
-    public Versions(long guid, TokensWrapper tokensWrapper, String version, String date){
+    public Versions(long guid, TokensWrapper tokensWrapper, String version, String versionDescription, String date){
         this.entity_id = guid;
         this.date = date;
         this.tokensWrapper = tokensWrapper;
         this.version = version;
+        this.versionDescription = versionDescription;
     }
 
 }

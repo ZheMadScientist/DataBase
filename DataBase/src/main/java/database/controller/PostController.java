@@ -91,6 +91,9 @@ public class PostController {
 
             em.merge(newInstance);
         } else {
+            em.persist(newInstance.tags);
+            em.persist(newInstance.content);
+            em.persist(newInstance.user);
             em.persist(newInstance);
         }
         em.flush();

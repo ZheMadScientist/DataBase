@@ -5,14 +5,21 @@ import database.model.storage.Material;
 import database.model.storage.Review;
 import database.model.tagging.Tags;
 import database.model.user.User;
+import database.repos.MaterialRepo;
+import database.repos.ReviewRepo;
+import database.repos.UserRepo;
 import database.versioning.AllVersions;
 import database.versioning.VController;
+import database.versioning.Versions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Контроллер, отвечающий на get запросы
@@ -21,6 +28,15 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping(value = "/get")
 public class GetController {
+
+    @Autowired
+    private ReviewRepo reviewRepo;
+
+    @Autowired
+    private UserRepo userRepo;
+
+    @Autowired
+    private MaterialRepo materialRepo;
 
     @PersistenceContext
     private EntityManager em;
@@ -34,53 +50,60 @@ public class GetController {
     /**
      * Метод для получения Материала по параметрам
      * Пример запроса: url / get / material ? name = {} & description = {} & version = 1
-     * @param name - наименование, обязательный параметр
+     * @param name - наименование
      * @param description - описание
-     * @param version - требуемая версия
+     * @param tags - тэги в виде списка
+     * @param getAll boolean, если {@code true}, возвращаются все материалы из базы
+     * @return {@link List<Material>}
+     */
+    @RequestMapping(value = "/materials", method = RequestMethod.GET)
+    public List<Material> getMaterial(@RequestParam(value="name", required = false) String name,
+                                      @RequestParam(value="description", required = false) String description,
+                                      @RequestParam(value="tags", required = false) ArrayList<String> tags,
+                                      @RequestParam(value = "getAll", required = false, defaultValue = "false") boolean getAll) {
+
+        if(getAll)
+            return materialRepo.findAll();
+
+        List<Material> res;
+
+        Tags tagsWrapper = new Tags(tags);
+
+        if(name != null && description != null && tags != null)
+            res = materialRepo.getMaterialsByNameAndDescriptionAndTagsIn(name, description, tagsWrapper);
+
+        else if(name != null && description != null)
+            res = materialRepo.getMaterialsByNameAndDescription(name, description);
+
+        else if(name != null)
+            res = materialRepo.getMaterialsByName(name);
+
+        else throw new IllegalArgumentException("At least one argument must not be null");
+
+        return res;
+    }
+
+    /**
+     * Метод получения материала по GUID
+     * @param id guid материала
+     * @param version требуемая версия
      * @return {@link Material}
      */
-    @RequestMapping(value = "/material", method = RequestMethod.GET)
-    public Material material(@RequestParam(value="name") String name,
-                             @RequestParam(value="description", required = false) String description,
-                             @RequestParam(value="version", required = false, defaultValue = "1") String version) {
 
-        //if(!version.equals(""))
-            //return versionController.getOlder(em.find(Material.class, id), Material.class, version, em);
+    @RequestMapping(value = "/material_by_id", method = RequestMethod.GET)
+    public Material getMaterialById(@RequestParam(value="id") long id,
+                                    @RequestParam(value="version", required = false, defaultValue = "") String version) {
 
-        //return em.find(Material.class, id);
-        return new Material();
+        Material material = em.find(Material.class, id);
+
+        if(!version.equals(""))
+            return versionController.getOlder(material, Material.class, version, em);
+
+        return material;
     }
 
     /*
      * EOF CONTENT
-     */
-
-    /*
-     * USERS
-     */
-
-    /**
-     * Метод для получения юзера по параметрам
-     * @param name - имя, обязательный параметр
-     * @param midName - отчество
-     * @param lastName - фамилия
-     * @param age - возраст
-     * @param gender - пол (male / female)
-     * @return {@link User}
-     */
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public User user (@RequestParam(value="name") String name,
-                      @RequestParam(value="mid_name", required = false) String midName,
-                      @RequestParam(value="last_name", required = false) String lastName,
-                      @RequestParam(value="age", required = false) int age,
-                      @RequestParam(value="gender", required = false) String gender) {
-
-
-        return new User();
-    }
-
-    /*
-     * EOF USERS
      */
 
 
@@ -92,38 +115,74 @@ public class GetController {
      * Метод для получения объекта {@link Review} <br> Все параметры могут быть {@code null} или неполными объектами. <br>
      *     Например, {@link User} может иметь только {@code User.name} <br>
      *         Но хотя бы один параметр должен быть ненулевым
-     * @param user - юзер, которому принадлжеит отзыв
-     * @param tags - набор тэгов для поиска отзыва
-     * @param fromDate - начальная дата для фильтрации отзывов
-     * @param toDate - конечная дата для фильтрации отзывов
-     * @param version - имя нужной версии отзыва
-     * @return {@link Review}
+     * @param tags набор тэгов для поиска отзыва
+     * @param fromAge начальный возраст юзера, оставившего отзыв
+     * @param toAge конечный возраст юзера
+     * @param gender пол юзера
+     * @param fromDate начальная дата для фильтрации отзывов
+     * @param toDate конечная дата для фильтрации отзывов
+     * @param getAll boolean, если {@code true}, возвращаются все отзывы из базы
+     * @return {@link List<Review>}
      */
-    @RequestMapping(value = "/review", method = RequestMethod.GET)
-    public Review review (User user,
-                          Tags tags,
-                          @RequestParam(value = "from", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate fromDate,
-                          @RequestParam(value = "to", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate toDate,
-                          @RequestParam(value="version", required = false, defaultValue = "1") String version) {
+    @RequestMapping(value = "/reviews", method = RequestMethod.GET)
+    public List<Review> getReview (
+                                @RequestParam(value="tags", required = false) ArrayList<String> tags,
+                                @RequestParam(value = "fromAge", required = false, defaultValue = "-1") int fromAge,
+                                @RequestParam(value = "toAge", required = false, defaultValue = "-1") int toAge,
+                                @RequestParam(value = "gender", required = false) String gender,
+                                @RequestParam(value = "fromDate", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate fromDate,
+                                @RequestParam(value = "toDate", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate toDate,
+                                @RequestParam(value = "getAll", required = false, defaultValue = "false") boolean getAll) {
 
-        String query = "from Review ";
+        Tags tagsWrapper = new Tags(tags);
+        List<User> users;
+        List<Review> res = new ArrayList<>();
 
-        if(fromDate != null || toDate != null) {
 
-            if(fromDate == null)
-                fromDate = LocalDate.MIN;
 
-            if(toDate == null)
-                toDate = LocalDate.MAX;
+        if(getAll)
+            return reviewRepo.findAll();
 
-            query += "where (date > fromDate and date < toDate";
+        if(fromDate == null)
+            fromDate = LocalDate.MIN;
+
+        if(toDate == null)
+            toDate = LocalDate.MAX;
+
+        if(!tagsWrapper.isValid())
+            return reviewRepo.getReviewsByDateBetween(fromDate.toString(), toDate.toString());
+        
+        if(toAge == -1)
+            toAge = Integer.MAX_VALUE;
+
+        if(gender != null) {
+            users = userRepo.getUsersByAgeBetweenAndGender(fromAge, toAge, gender);
+        } else {
+            users = userRepo.getUsersByAgeBetween(fromAge, toAge);
         }
 
-        
+        for(User u : users)
+            res.addAll(reviewRepo.getReviewsByUserAndDateBetweenAndTagsIn(u, fromDate.toString(), toDate.toString(), tagsWrapper));
 
-        em.createQuery(query);
+        return res;
+    }
 
-        return new Review();
+    /**
+     * Метод получения отзыва по GUID
+     * @param id guid отзыва
+     * @param version требуемая версия отзыва
+     * @return {@link Review}
+     */
+    @RequestMapping(value = "/review_by_id", method = RequestMethod.GET)
+    public Review getReviewById (@RequestParam(value="id") long id,
+                                 @RequestParam(value="version", required = false, defaultValue = "") String version) {
+
+        Review review = em.find(Review.class, id);
+
+        if(!version.equals(""))
+            review = versionController.getOlder(review, Review.class, version, em);
+
+        return review;
     }
 
     /*
@@ -136,15 +195,23 @@ public class GetController {
 
     /**
      * Метод для получения имен и описаний всех версий сущности
-     * @param id - guid сущности
+     * @param id guid сущности
      * @return имена всех сохраненных в бд версий
      * @see AllVersions
      */
     @RequestMapping(value = "/get_all_versions", method = RequestMethod.GET)
-    public AllVersions getAllMaterialVersions (@RequestParam(value="id") int id) {
+    public AllVersions getAllVersions (@RequestParam(value="id") long id) {
 
+        List<Versions> versions = em.createQuery("SELECT t FROM Versions t where t.entity_id = :id")
+                .setParameter("id", id)
+                .getResultList();
 
-        return new AllVersions();
+        AllVersions allVersions = new AllVersions();
+
+        for(Versions v : versions)
+            allVersions.put(v.version, v.versionDescription);
+
+        return allVersions;
     }
 
     /*

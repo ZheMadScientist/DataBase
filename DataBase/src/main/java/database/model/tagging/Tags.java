@@ -13,6 +13,14 @@ public class Tags extends database.model.Entity {
     @ElementCollection
     public List<String> tags;
 
+    public boolean isValid() {
+        return tags != null;
+    }
+
     public Tags() {}
+
+    public Tags(List<String> tags) {
+        this.tags = tags;
+    }
 
 }

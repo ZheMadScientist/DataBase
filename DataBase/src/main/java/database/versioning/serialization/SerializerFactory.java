@@ -21,10 +21,7 @@ public class SerializerFactory<T extends Entity> {
     public Serializer getSerializer(Class<T> c){
         Serializer serializer;
 
-        if(c == Material.class){
-            serializer = new MaterialSerializer();
-
-        } else if(c == Task.class){
+        if(c == Task.class){
             serializer = new TaskSerializer();
 
         } else if(c == User.class) {

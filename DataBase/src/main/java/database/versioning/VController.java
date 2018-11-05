@@ -49,7 +49,7 @@ public class VController {
 
         TokensWrapper tokensWrapper = VersioningUtils.getTokensWrapper(newJSON, oldJSON);
 
-        Versions dump = new Versions(old.GUID, tokensWrapper, old.version, old.date);
+        Versions dump = new Versions(old.GUID, tokensWrapper, old.version, old.versionDescription, old.date);
 
         em.persist(dump);
         em.flush();

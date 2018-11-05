@@ -31,6 +31,9 @@ public class Review extends Entity {
     @OneToOne
     public Tags tags;
 
+    //@ElementCollection
+    //public List<String> tags;
+
     @Column(columnDefinition = "TIMESTAMP")
     public LocalDate date;
 
@@ -38,8 +41,12 @@ public class Review extends Entity {
         date = LocalDate.now();
     }
 
-    public Review (Review old) {
-        // TODO: implement
+    public Review (Review another) {
+        super(another.version, another.versionDescription);
+        this.user = another.user;
+        this.date = another.date;
+        this.content = another.content;
+        this.tags = another.tags;
     }
 
 }

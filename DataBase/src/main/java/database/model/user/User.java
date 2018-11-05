@@ -24,9 +24,13 @@ public class User extends database.model.Entity {
     @Basic
     public String lastName;
 
-    public int age;
+    public Integer age;
 
-    public String gender = "";
+    /**
+     * default vals: <br>male - m
+     * <br>female - f
+     */
+    public String gender;
 
     /**
      * Объект, хранящий активность (логи) пользователя
@@ -47,11 +51,17 @@ public class User extends database.model.Entity {
     @ManyToOne
     public Access access;
 
+    public boolean isValid() {
+        return name != null || middleName != null || lastName != null || age != null;
+    }
+
     public User(){ }
 
     public User(User other){
-        name = other.name;
-        middleName = other.middleName;
-        lastName = other.lastName;
+        this.name = other.name;
+        this.middleName = other.middleName;
+        this.lastName = other.lastName;
+        this.age = other.age;
+        this.gender = other.gender;
     }
 }
