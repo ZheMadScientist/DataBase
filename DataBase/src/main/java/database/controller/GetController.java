@@ -48,11 +48,11 @@ public class GetController {
      */
 
     /**
-     * Метод для получения Материала по параметрам
+     * Метод для получения Материалов {@link List<Material>} по параметрам
      * Пример запроса: url / get / material ? name = {} & description = {} & version = 1
-     * @param name - наименование
-     * @param description - описание
-     * @param tags - тэги в виде списка
+     * @param name наименование
+     * @param description описание
+     * @param tags тэги в виде списка
      * @param getAll boolean, если {@code true}, возвращаются все материалы из базы
      * @return {@link List<Material>}
      */
@@ -112,7 +112,7 @@ public class GetController {
      */
 
     /**
-     * Метод для получения объекта {@link Review} <br> Все параметры могут быть {@code null} или неполными объектами. <br>
+     * Метод для получения объекта {@link List<Review>} <br> Все параметры могут быть {@code null} или неполными объектами. <br>
      *     Например, {@link User} может иметь только {@code User.name} <br>
      *         Но хотя бы один параметр должен быть ненулевым
      * @param tags набор тэгов для поиска отзыва
