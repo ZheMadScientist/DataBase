@@ -150,7 +150,7 @@ public class GetController {
             toDate = LocalDate.MAX;
 
         if(!tagsWrapper.isValid())
-            return reviewRepo.getReviewsByDateBetween(fromDate.toString(), toDate.toString());
+            return reviewRepo.getReviewsByReviewDateBetween(fromDate.toString(), toDate.toString());
         
         if(toAge == -1)
             toAge = Integer.MAX_VALUE;
@@ -162,7 +162,7 @@ public class GetController {
         }
 
         for(User u : users)
-            res.addAll(reviewRepo.getReviewsByUserAndDateBetweenAndTagsIn(u, fromDate.toString(), toDate.toString(), tagsWrapper));
+            res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTagsIn(u, fromDate.toString(), toDate.toString(), tagsWrapper));
 
         return res;
     }

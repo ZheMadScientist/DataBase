@@ -65,5 +65,10 @@ jar {
     }
     baseName = 'database'
     version = '0.1.0'
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
 }
 

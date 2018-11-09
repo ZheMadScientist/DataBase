@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface ReviewRepo extends JpaRepository<Review, Long> {
 
-    List<Review> getReviewsByUserAndDateBetweenAndTagsIn(User user, String fromDate, String toDate, Tags tags);
+    List<Review> getReviewsByUserAndReviewDateBetweenAndTagsIn(User user, String fromDate, String toDate, Tags tags);
 
     //List<Review> getReviewsByUser
 
-    List<Review> getReviewsByDateBetween(String from, String to);
+    List<Review> getReviewsByReviewDateBetween(String from, String to);
 }

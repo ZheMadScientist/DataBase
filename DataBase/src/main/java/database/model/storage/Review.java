@@ -35,16 +35,16 @@ public class Review extends Entity {
     //public List<String> tags;
 
     @Column(columnDefinition = "TIMESTAMP")
-    public LocalDate date;
+    public LocalDate reviewDate;
 
     public Review () {
-        date = LocalDate.now();
+        reviewDate = LocalDate.now();
     }
 
     public Review (Review another) {
         super(another.version, another.versionDescription);
         this.user = another.user;
-        this.date = another.date;
+        this.reviewDate = another.reviewDate;
         this.content = another.content;
         this.tags = another.tags;
     }
