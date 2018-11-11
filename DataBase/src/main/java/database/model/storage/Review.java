@@ -5,7 +5,6 @@ import database.model.tagging.Tags;
 import database.model.user.User;
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
@@ -34,7 +33,7 @@ public class Review extends Entity {
     //@ElementCollection
     //public List<String> tags;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    //@Column(columnDefinition = "TIMESTAMP")
     public LocalDate reviewDate;
 
     public Review () {

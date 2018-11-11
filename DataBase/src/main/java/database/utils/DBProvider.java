@@ -88,10 +88,15 @@ public class DBProvider {
                 if(!(tmp.contains("databasechangelog") || tmp.contains("hibernate") || Arrays.asList(DBConstants.NON_ENTITY_EXTENDED_ELEMENTS).contains(tmp))){
                     String query = "SELECT * FROM " + tmp + ";";
 
+                    String guidName = "guid";
+
+                    if(DBConstants.ELEMENT_COLLECTION_ELEMENTS.containsKey(tmp))
+                        guidName = DBConstants.ELEMENT_COLLECTION_ELEMENTS.get(tmp);
+
                     ResultSet rs = s.executeQuery(query);
 
                     while ( rs.next() ) {
-                        long guid = rs.getLong("guid");
+                        long guid = rs.getLong(guidName);
                         selected.add(guid);
                     }
                     rs.close();

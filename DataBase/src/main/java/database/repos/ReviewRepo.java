@@ -6,14 +6,15 @@ import database.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface ReviewRepo extends JpaRepository<Review, Long> {
 
-    List<Review> getReviewsByUserAndReviewDateBetweenAndTagsIn(User user, String fromDate, String toDate, Tags tags);
+    List<Review> getReviewsByUserAndReviewDateBetweenAndTagsIn(User user, LocalDate fromDate, LocalDate toDate, Tags tags);
 
     //List<Review> getReviewsByUser
 
-    List<Review> getReviewsByReviewDateBetween(String from, String to);
+    List<Review> getReviewsByReviewDateBetween(LocalDate from, LocalDate to);
 }
