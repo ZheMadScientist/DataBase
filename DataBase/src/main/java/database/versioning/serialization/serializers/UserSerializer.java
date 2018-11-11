@@ -3,7 +3,6 @@ package database.versioning.serialization.serializers;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import database.model.Entity;
-import database.model.user.Access;
 import database.model.user.User;
 import database.versioning.serialization.Constants;
 import database.versioning.serialization.Serializer;
@@ -37,8 +36,6 @@ public class UserSerializer implements Serializer <User> {
             writer.name(Constants.NAME).value(src.name);
             writer.name(Constants.MIDDLE_NAME).value(src.middleName);
             writer.name(Constants.LAST_NAME).value(src.lastName);
-
-            writer.name(Constants.INNER_ENTITY_ID).value(src.access.id);
 
             writer.endObject();
 
@@ -79,9 +76,6 @@ public class UserSerializer implements Serializer <User> {
                 } else if (name.equals(Constants.LAST_NAME)) {
                     user.lastName = reader.nextString();
 
-                } else if (name.equals(Constants.INNER_ENTITY_ID)) {
-                    user.access.id = reader.nextLong();
-
                 } else {
                     reader.skipValue();
                 }
@@ -92,7 +86,6 @@ public class UserSerializer implements Serializer <User> {
 
         } catch (IOException e) { }
 
-        user.access = em.find(Access.class, user.access.id);
 
         return user;
     }

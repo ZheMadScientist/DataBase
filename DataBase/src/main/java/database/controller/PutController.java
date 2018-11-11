@@ -97,8 +97,6 @@ public class PutController {
             em.remove(instance);
 
         em.persist(user.versionDescription);
-        em.persist(user.userLog);
-        em.persist(user.user_courses);
         em.persist(user);
 
         em.flush();

@@ -1,12 +1,11 @@
 package database.model.user;
 
-import database.model.course.CourseState;
-import database.model.stat.log.UserLog;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 /**
  * Класс, описывающий пользователя
@@ -31,25 +30,6 @@ public class User extends database.model.Entity {
      * <br>female - f
      */
     public String gender;
-
-    /**
-     * Объект, хранящий активность (логи) пользователя
-     */
-    @OneToOne
-    public UserLog userLog = new UserLog();
-
-    /**
-     * Список курсов, в которых учавствует пользователь
-     */
-    @OneToMany(mappedBy = "students")
-    public List<CourseState> user_courses = new ArrayList<>();
-
-    /**
-     * Объект, хранящий права доступа пользователя к другим сущностям бд
-     * @see Access
-     */
-    @ManyToOne
-    public Access access;
 
     public boolean isValid() {
         return name != null || middleName != null || lastName != null || age != null;

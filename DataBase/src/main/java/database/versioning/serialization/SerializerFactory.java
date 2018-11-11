@@ -2,10 +2,12 @@ package database.versioning.serialization;
 
 import database.model.Entity;
 import database.model.course.Course;
-import database.model.storage.Material;
 import database.model.storage.Task;
 import database.model.user.User;
-import database.versioning.serialization.serializers.*;
+import database.versioning.serialization.serializers.CourseSerializer;
+import database.versioning.serialization.serializers.DefaultSerializer;
+import database.versioning.serialization.serializers.TaskSerializer;
+import database.versioning.serialization.serializers.UserSerializer;
 
 /**
  * Фабрика для получения нужной реализации интерфейса {@link Serializer}
