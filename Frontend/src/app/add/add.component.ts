@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-add',
@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
+  @Input() userName: string;
+  @Input() picker: string;
+  material: boolean;
+  
   constructor() { }
 
   ngOnInit() {
