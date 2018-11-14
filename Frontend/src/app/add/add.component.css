@@ -6,8 +6,8 @@
   width: 100%;
 }
 
-.max-stretched-tabs {
-  max-width: 800px;
+.default_field {
+  width: 20%;
 }
 
 .example-header-image {

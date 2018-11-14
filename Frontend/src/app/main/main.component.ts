@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -7,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  obs: Observable<any>;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private appRef: ApplicationRef,
+    private injector: Injector
+  ) { }
 
   ngOnInit() {
+  }
 
+  getAllReviews($event) {
+    alert('mess received');
   }
 
 }

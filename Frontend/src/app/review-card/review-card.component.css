@@ -1,0 +1,21 @@
+.review-card {
+  margin-top: 2%;
+}
+
+.review-card-user {
+  margin-top: 2%;
+}
+
+.review-card-content {
+  margin-top: 2%;
+}
+
+.review-card-tags {
+  margin-top: 2%;
+}
+
+.review-card-date {
+  margin-top: 2%;
+  margin-left: auto;
+  max-width: 200px;
+}
