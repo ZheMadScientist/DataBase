@@ -9,6 +9,7 @@ import { AddComponent } from './add/add.component';
 import { ReviewComponent } from './review/review.component';
 import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatTabsModule} from "@angular/material";
 import { ReviewCardComponent } from './review-card/review-card.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ReviewCardComponent } from './review-card/review-card.component';
     MatInputModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

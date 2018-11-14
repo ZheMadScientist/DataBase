@@ -14,31 +14,31 @@
 
         <div>
           <mat-form-field style="margin-top: 2%; width: 20%">
-            <mat-select placeholder="Gender">
-              <mat-option value="option">male</mat-option>
-              <mat-option value="option">female</mat-option>
+            <mat-select [(ngModel)]="gender" placeholder="Gender">
+              <mat-option value="m">male</mat-option>
+              <mat-option value="f">female</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
         <mat-form-field style="width: 49%">
-          <input matInput placeholder="From age">
+          <input matInput type="number" [(ngModel)]="fromAge" placeholder="From age">
         </mat-form-field>
 
         <mat-form-field style="margin-left: 2%; width: 49%">
-          <input matInput placeholder="To age">
+          <input matInput type="number" [(ngModel)]="toAge" placeholder="To age">
         </mat-form-field>
 
         <div style="margin-top: 2%; font-size: large"><label>Date range</label></div>
 
         <mat-form-field style="margin-top: 2%; width: 49%">
-          <input matInput [matDatepicker]="pickerFrom" placeholder="From date">
+          <input matInput [(ngModel)]="fromDate" [matDatepicker]="pickerFrom" placeholder="From date">
           <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
           <mat-datepicker #pickerFrom></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field style="margin-left: 2%; width: 49%">
-          <input matInput [matDatepicker]="pickerTo" placeholder="From date">
+          <input matInput [(ngModel)]="toDate" [matDatepicker]="pickerTo" placeholder="From date">
           <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
           <mat-datepicker #pickerTo></mat-datepicker>
         </mat-form-field>
@@ -46,7 +46,7 @@
         <div style="margin-top: 2%; font-size: large"><label>Tags</label></div>
 
         <mat-form-field style="margin-top: 2%; width: 100%">
-          <textarea matInput
+          <textarea matInput [(ngModel)]="tags"
                     cdkTextareaAutosize
                     #autosize="cdkTextareaAutosize"
                     cdkAutosizeMinRows="1"
@@ -55,8 +55,8 @@
         </mat-form-field>
 
         <div style="width: 100%; float: right">
-          <button mat-flat-button color="primary" style="float: right; margin-left: 2%">Send</button>
-          <button mat-flat-button (click)="getAll()" color="warn" style="float: right">Get all</button>
+          <button mat-flat-button (click)="sendRequest()" color="primary" style="float: right; margin-left: 2%">Send</button>
+          <button mat-flat-button (click)="getAllReviews()" color="warn" style="float: right">Get all</button>
         </div>
 
 

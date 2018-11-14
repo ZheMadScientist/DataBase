@@ -1,5 +1,6 @@
 import {ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
+import {ReviewRequest} from '../model/requests/review_request';
 
 @Component({
   selector: 'app-main',
@@ -19,8 +20,8 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
-  getAllReviews($event) {
-    alert('mess received');
+  getReviews(request: ReviewRequest) {
+    console.log(request.createQuery());
   }
 
 }

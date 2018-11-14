@@ -1,0 +1,3 @@
+interface GetRequest {
+  createQuery(): string;
+}
