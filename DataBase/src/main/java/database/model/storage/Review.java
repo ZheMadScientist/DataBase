@@ -22,7 +22,7 @@ public class Review extends Entity {
      * Сам отзыв
      */
     @OneToOne
-    public  Content content;
+    public Content content;
 
     /**
      * Тэги

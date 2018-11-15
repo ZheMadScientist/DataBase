@@ -19,6 +19,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,6 +44,10 @@ public class GetController {
     private EntityManager em;
 
     private VController versionController = new VController();
+
+    private LocalDate minDate = LocalDate.of(1973, 1,1);
+
+    private LocalDate maxDate = LocalDate.of(3000, 1,1);
 
     /*
      * CONTENT
@@ -67,16 +73,26 @@ public class GetController {
 
         List<Material> res;
 
-        Tags tagsWrapper = new Tags(tags);
-
         if(name != null && description != null && tags != null)
-            res = materialRepo.getMaterialsByNameAndDescriptionAndTagsIn(name, description, tagsWrapper);
+            res = materialRepo.getMaterialsByNameAndDescriptionAndTags_tagsContaining(name, description, tags);
 
         else if(name != null && description != null)
             res = materialRepo.getMaterialsByNameAndDescription(name, description);
 
+        else if(name != null && tags != null)
+            res = materialRepo.getMaterialsByNameAndTags_tagsContaining(name, tags);
+
+        else if(description != null && tags != null)
+            res = materialRepo.getMaterialsByDescriptionAndTags_tagsContaining(description, tags);
+
+        else if(tags != null)
+            res = materialRepo.getMaterialsByTags_tagsContaining(tags);
+
         else if(name != null)
             res = materialRepo.getMaterialsByName(name);
+
+        else if(description != null)
+            res = materialRepo.getMaterialsByDescription(description);
 
         else throw new IllegalArgumentException("At least one argument must not be null");
 
@@ -134,7 +150,6 @@ public class GetController {
                                 @RequestParam(value = "toDate", required = false) @DateTimeFormat(pattern="dd.MM.yyyy") LocalDate toDate,
                                 @RequestParam(value = "getAll", required = false, defaultValue = "false") boolean getAll) {
 
-        Tags tagsWrapper = new Tags(tags);
         List<User> users;
         List<Review> res = new ArrayList<>();
 
@@ -143,15 +158,21 @@ public class GetController {
         if(getAll)
             return reviewRepo.findAll();
 
+        if(tags == null && fromAge == -1 && toAge == -1 && gender == null && fromDate == null && toDate == null)
+            throw new IllegalArgumentException("At least one argument must not be null");
+
         if(fromDate == null)
-            fromDate = LocalDate.MIN;
+            fromDate = minDate;
 
         if(toDate == null)
-            toDate = LocalDate.MAX;
+            toDate = maxDate;
 
-        if(!tagsWrapper.isValid())
+        if(tags == null && gender == null && fromAge == -1 && toAge == -1)
             return reviewRepo.getReviewsByReviewDateBetween(fromDate, toDate);
-        
+
+        if(tags != null && gender == null && fromAge == -1 && toAge == -1)
+            return reviewRepo.getReviewsByTags_tagsContaining(tags);
+
         if(toAge == -1)
             toAge = Integer.MAX_VALUE;
 
@@ -162,7 +183,8 @@ public class GetController {
         }
 
         for(User u : users)
-            res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTagsIn(u, fromDate, toDate, tagsWrapper));
+            res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTags_tagsContaining(u, fromDate, toDate, tags));
+
 
         return res;
     }
