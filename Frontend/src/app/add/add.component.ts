@@ -40,8 +40,12 @@ export class AddComponent implements OnInit {
     const request = new ReviewRequest(false);
 
     request.gender = this.gender;
-    request.fromAge = this.fromAge;
-    request.toAge = this.toAge;
+
+    if(this.fromAge != null)
+      request.fromAge = this.fromAge;
+
+    if(this.toAge != null)
+      request.toAge = this.toAge;
 
     if(this.fromDate != null)
       request.fromDate = this.parseDate(this.fromDate.toString());

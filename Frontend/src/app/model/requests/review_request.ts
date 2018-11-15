@@ -22,7 +22,7 @@ export class ReviewRequest implements GetRequest {
                      + '&' + 'toAge' + '=' + this.toAge
                      + '&' + 'fromDate' + '=' + this.fromDate
                      + '&' + 'toDate' + '=' + this.toDate
-                     + '&' + 'tags' + '=[' + this.tags + ']'
+                     + '&' + 'tags' + '=' + this.tags
                      + '&' + 'getAll' + '=' + this.getAll);
   }
 }
