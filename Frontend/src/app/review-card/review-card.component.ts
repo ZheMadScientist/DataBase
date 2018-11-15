@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Review} from "../model/data/review";
 
 @Component({
   selector: 'app-review-card',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() review: Review;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

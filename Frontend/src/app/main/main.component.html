@@ -1,4 +1,9 @@
 <div style="width: 800px; margin: 2% auto">
   <app-add (onReviewRequest)="getReviews($event)"></app-add>
+
+  <div *ngFor="let review of reviews">
+    <app-review-card [review]="review"></app-review-card>
+  </div>
+
 </div>
 
