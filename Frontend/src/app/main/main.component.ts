@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   }
 
   getReviews(request: ReviewRequest) {
-    let url: string = API.appUrl + request.createQuery();
+    const url: string = API.appUrl + request.createQuery();
 
     console.log(url);
 
@@ -44,49 +44,6 @@ export class MainComponent implements OnInit {
       error => {
         console.log(error);
       });
-
-
-    /*this.reviews = [
-      {
-        GUID: 1,
-        user: {
-          GUID: 2,
-          name: "Lil",
-          middleName: "Mouker",
-          lastName: "Vert",
-          age: 19,
-          gender: "m"
-        },
-        content: {
-          GUID: 3,
-          content: "content of content"
-        },
-        tags: {
-          GUID: 4,
-          tags: ["tag1", "tag2", "anomaly"]
-        },
-        reviewDate: "2018,11,11"
-      },
-      {
-        GUID: 5,
-        user: {
-          GUID: 6,
-          name: "Lil",
-          middleName: "Loxa",
-          lastName: "Vert",
-          age: 20,
-          gender: "f"
-        },
-        content: {
-          GUID: 7,
-          content: "content of Loxa content"
-        },
-        tags: {
-          GUID: 8,
-          tags: ["tag1", "tag2", "anomaly"]
-        },
-        reviewDate: "2018,12,11"
-      }];*/
   }
 
 }

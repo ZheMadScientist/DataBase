@@ -1,4 +1,5 @@
-export interface Tags {
-  GUID: number;
-  tags: string[];
+export class Tags {
+  tags: string[] = [];
+
+  constructor() {}
 }

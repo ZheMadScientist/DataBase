@@ -1,6 +1,6 @@
 export class API {
-  //static readonly appUrl: string = 'http://195.225.57.253:48060';
-  static readonly appUrl: string = 'http://localhost:8080';
+  static readonly appUrl: string = 'http://195.225.57.253:48060';
+  //static readonly appUrl: string = 'http://localhost:8080';
 
   // Get controller
   static readonly getUrl: string = API.appUrl + "/get";
@@ -9,6 +9,6 @@ export class API {
 
   // Post controller
   static readonly postUrl: string = API.appUrl + "/persist";
-  static readonly insertMaterialUrl: string = API.postUrl + "/material";
-  static readonly insertReviewUrl: string = API.postUrl + "/review";
+  static readonly postMaterialUrl: string = API.postUrl + "/material";
+  static readonly postReviewUrl: string = API.postUrl + "/review";
 }

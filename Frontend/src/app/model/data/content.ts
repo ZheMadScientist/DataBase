@@ -1,4 +1,5 @@
-export interface Content {
-  GUID: number;
-  content: string;
+export class Content {
+  content: string = '';
+
+  constructor() {}
 }
