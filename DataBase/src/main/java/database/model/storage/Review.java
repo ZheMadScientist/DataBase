@@ -4,6 +4,7 @@ import database.model.Entity;
 import database.model.tagging.Tags;
 import database.model.user.User;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
@@ -30,10 +31,8 @@ public class Review extends Entity {
     @OneToOne
     public Tags tags;
 
-    //@ElementCollection
-    //public List<String> tags;
 
-    //@Column(columnDefinition = "TIMESTAMP")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     public LocalDate reviewDate;
 
     public Review () {

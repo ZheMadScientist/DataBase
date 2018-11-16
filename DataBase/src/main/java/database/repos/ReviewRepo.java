@@ -13,6 +13,8 @@ public interface ReviewRepo extends JpaRepository<Review, Long> {
 
     List<Review> getReviewsByUserAndReviewDateBetweenAndTags_tagsContaining(User user, LocalDate fromDate, LocalDate toDate, List<String> tags);
 
+    List<Review> getReviewsByUserAndReviewDateBetween(User user, LocalDate fromDate, LocalDate toDate);
+
     List<Review> getReviewsByTags_tagsContaining(List<String> tags);
 
     List<Review> getReviewsByReviewDateBetween(LocalDate from, LocalDate to);
