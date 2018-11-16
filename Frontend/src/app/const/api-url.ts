@@ -1,5 +1,6 @@
 export class API {
-  static readonly appUrl: string = '195.225.57.253:48060';
+  //static readonly appUrl: string = 'http://195.225.57.253:48060';
+  static readonly appUrl: string = 'http://localhost:8080';
 
   // Get controller
   static readonly getUrl: string = API.appUrl + "/get";

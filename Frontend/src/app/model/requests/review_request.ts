@@ -17,12 +17,25 @@ export class ReviewRequest implements GetRequest {
   }
 
   createQuery(): string {
-    return String('/get/reviews?' + 'gender' + '=' + this.gender
-                     + '&' + 'fromAge' + '=' + this.fromAge
-                     + '&' + 'toAge' + '=' + this.toAge
-                     + '&' + 'fromDate' + '=' + this.fromDate
-                     + '&' + 'toDate' + '=' + this.toDate
-                     + '&' + 'tags' + '=' + this.tags
-                     + '&' + 'getAll' + '=' + this.getAll);
+    let res: string = '/get/reviews?'
+            + 'fromAge' + '=' + this.fromAge
+      + '&' + 'toAge' + '=' + this.toAge;
+
+    if(this.gender != null)
+      res += '&' + 'gender' + '=' + this.gender;
+
+    if(this.fromDate != null)
+      res += '&' + 'fromDate' + '=' + this.fromDate;
+
+    if(this.toDate != null)
+      res += '&' + 'fromDate' + '=' + this.toDate;
+
+    if(this.tags != null)
+      res += + '&' + 'tags' + '=' + this.tags;
+
+    if(this.getAll)
+      res += '&' + 'getAll' + '=' + this.getAll;
+
+    return res;
   }
 }

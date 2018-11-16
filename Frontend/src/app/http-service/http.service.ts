@@ -1,18 +1,14 @@
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HttpService {
 
-  constructor() {
+  constructor(private httpClient: HttpClient) { }
+
+  public get(url: string): Observable<any>{
+    return this.httpClient.get(url);
   }
 
-  static httpGet(url) {
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.responseType = 'json';
-    xmlHttp.open("GET", url, false); // false for synchronous request
-    xmlHttp.send();
-    return xmlHttp.response
-  }
 }

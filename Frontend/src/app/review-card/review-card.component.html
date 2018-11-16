@@ -1,24 +1,33 @@
 <mat-card class="review-card" style="max-width: 800px">
 
+  <h1>Review</h1>
+
   <mat-card class="review-card-user">
+    <h2>User</h2>
     <p class="review-card-user-text">
-      {{review.user}}
+      {{review.user.name}} {{review.user.lastName}} {{review.user.middleName}}
+    </p>
+    <p class="review-card-user-text">
+      Gender: {{review.user.gender}}; Age: {{review.user.age}}
     </p>
   </mat-card>
 
   <mat-card class="review-card-content">
+    <h2>Content</h2>
     <p class="review-card-content-text">
-      {{review.content}}
+      {{review.content.content}}
     </p>
   </mat-card>
 
   <mat-card class="review-card-tags">
+    <h2>Tags</h2>
     <p class="review-card-tags-text">
-      {{review.tags}}
+      {{review.tags.tags}}
     </p>
   </mat-card>
 
   <mat-card class="review-card-date">
+    <h3>Date</h3>
     <p class="review-card-date-text">
       {{review.reviewDate}}
     </p>

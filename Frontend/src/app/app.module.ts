@@ -6,17 +6,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import { AddComponent } from './add/add.component';
-import { ReviewComponent } from './review/review.component';
 import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule, MatTabsModule} from "@angular/material";
 import { ReviewCardComponent } from './review-card/review-card.component';
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AddComponent,
-    ReviewComponent,
     ReviewCardComponent
   ],
   imports: [
@@ -31,6 +30,7 @@ import {FormsModule} from '@angular/forms';
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [],

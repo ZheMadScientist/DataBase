@@ -1,8 +1,10 @@
 import {ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ReviewRequest} from '../model/requests/review_request';
-import {Review} from "../model/data/review";
-import {API} from "../const/api-url";
+import {Review} from '../model/data/review';
+import {API} from '../const/api-url';
+import {HttpService} from '../http-service/http.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +15,8 @@ export class MainComponent implements OnInit {
 
   obs: Observable<any>;
 
+  client: HttpService;
+
   reviews: Review[];
 
   constructor(
@@ -20,6 +24,9 @@ export class MainComponent implements OnInit {
     private appRef: ApplicationRef,
     private injector: Injector
   ) {
+
+    this.client = new HttpService(injector.get<HttpClient>(HttpClient));
+
   }
 
   ngOnInit() {
@@ -27,8 +34,19 @@ export class MainComponent implements OnInit {
 
   getReviews(request: ReviewRequest) {
     let url: string = API.appUrl + request.createQuery();
-    // TODO: this.reviews = HttpService.httpGet(url);
-    this.reviews = [
+
+    console.log(url);
+
+    this.client.get(url).subscribe(r => {
+        this.reviews = r;
+        console.log(r);
+      },
+      error => {
+        console.log(error);
+      });
+
+
+    /*this.reviews = [
       {
         GUID: 1,
         user: {
@@ -68,7 +86,7 @@ export class MainComponent implements OnInit {
           tags: ["tag1", "tag2", "anomaly"]
         },
         reviewDate: "2018,12,11"
-      }];
+      }];*/
   }
 
 }
