@@ -2,7 +2,8 @@
   <ng-container>
     <mat-button-toggle-group class="full-width" name="fontStyle" value="review">
       <mat-button-toggle id="material-button" (click)="material=true" class="choice-button">Material</mat-button-toggle>
-      <mat-button-toggle id="review-button" (click)="material=false" class="choice-button" value="review">Review</mat-button-toggle>
+      <mat-button-toggle id="review-button" (click)="material=false" class="choice-button" value="review">Review
+      </mat-button-toggle>
     </mat-button-toggle-group>
   </ng-container>
 
@@ -55,13 +56,77 @@
         </mat-form-field>
 
         <div style="width: 100%; float: right">
-          <button mat-flat-button (click)="sendRequest()" color="primary" style="float: right; margin-left: 2%">Send</button>
+          <button mat-flat-button (click)="sendRequest()" color="primary" style="float: right; margin-left: 2%">Send
+          </button>
           <button mat-flat-button (click)="getAllReviews()" color="warn" style="float: right">Get all</button>
         </div>
 
 
       </mat-tab>
       <mat-tab label="POST">
+
+        <div style="margin-top: 2%; font-size: large"><label>User</label></div>
+
+        <mat-form-field style="width: 49%">
+          <input matInput placeholder="Name">
+        </mat-form-field>
+
+        <mat-form-field style="margin-left: 2%; width: 49%">
+          <input matInput placeholder="Middle name">
+        </mat-form-field>
+
+        <div>
+          <mat-form-field style="width: 49%">
+            <input matInput placeholder="Last Name">
+          </mat-form-field>
+
+          <mat-form-field style="margin-left: 2%; width: 20%">
+            <mat-select placeholder="Gender">
+              <mat-option value="m">male</mat-option>
+              <mat-option value="f">female</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field style="margin-left: 2%; width: 20%">
+            <input matInput type="number" placeholder="Age">
+          </mat-form-field>
+        </div>
+
+        <div style="margin-top: 2%; font-size: large"><label>Date</label></div>
+
+        <mat-form-field style="margin-top: 2%; width: 49%">
+          <input matInput [matDatepicker]="review_date" placeholder="Date">
+          <mat-datepicker-toggle matSuffix [for]="review_date"></mat-datepicker-toggle>
+          <mat-datepicker #review_date></mat-datepicker>
+        </mat-form-field>
+
+
+        <div style="margin-top: 2%; font-size: large"><label>Review</label></div>
+
+        <mat-form-field style="margin-top: 2%; width: 100%">
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                    placeholder="Review"></textarea>
+        </mat-form-field>
+
+        <div style="margin-top: 2%; font-size: large"><label>Tags</label></div>
+
+        <mat-form-field style="margin-top: 2%; width: 100%">
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                    placeholder="Tags"></textarea>
+        </mat-form-field>
+
+        <div style="width: 100%; float: right">
+          <button mat-flat-button (click)="sendRequest()" color="primary" style="float: right; margin-left: 2%">Send
+          </button>
+        </div>
 
       </mat-tab>
     </mat-tab-group>
