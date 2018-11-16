@@ -182,8 +182,13 @@ public class GetController {
             users = userRepo.getUsersByAgeBetween(fromAge, toAge);
         }
 
-        for(User u : users)
-            res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTags_tagsContaining(u, fromDate, toDate, tags));
+        if(tags != null) {
+            for (User u : users)
+                res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTags_tagsContaining(u, fromDate, toDate, tags));
+        } else {
+            for (User u : users)
+                res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetween(u, fromDate, toDate));
+        }
 
 
         return res;
