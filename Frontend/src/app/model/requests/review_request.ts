@@ -31,7 +31,7 @@ export class ReviewRequest implements GetRequest {
       res += '&' + 'fromDate' + '=' + this.toDate;
 
     if(this.tags != null)
-      res += + '&' + 'tags' + '=' + this.tags;
+      res += '&' + 'tags' + '=' + this.tags;
 
     if(this.getAll)
       res += '&' + 'getAll' + '=' + this.getAll;
