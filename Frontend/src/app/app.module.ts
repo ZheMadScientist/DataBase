@@ -10,13 +10,15 @@ import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModu
 import { ReviewCardComponent } from './review-card/review-card.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { MaterialCardComponent } from './material-card/material-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AddComponent,
-    ReviewCardComponent
+    ReviewCardComponent,
+    MaterialCardComponent
   ],
   imports: [
     BrowserModule,

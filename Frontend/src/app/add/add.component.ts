@@ -1,10 +1,12 @@
-import {Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Injector, OnInit, Output} from '@angular/core';
 import {ReviewRequest} from '../model/requests/review_request';
 import {HashMap} from '../model/hash_map';
 import {Review} from '../model/data/review';
 import {API} from '../const/api-url';
 import {HttpService} from '../http-service/http.service';
 import {HttpClient} from '@angular/common/http';
+import {Material} from "../model/data/material";
+import {MaterialRequest} from "../model/requests/material_request";
 
 @Component({
   selector: 'app-add',
@@ -26,8 +28,7 @@ export class AddComponent implements OnInit {
   fromDateGET: string = null;
   toDateGET: string = null;
 
-  tagsGET: string = null;
-
+  reviewTagsGET: string = null;
 
   userNamePost: string = null;
   userMiddleNamePost: string = null;
@@ -39,7 +40,18 @@ export class AddComponent implements OnInit {
   reviewContentPost: string = null;
   reviewTagsPost: string = null;
 
+  materialNamePost: string = null;
+  materialDescriptionPost: string = null;
+  materialContentPost: string = null;
+  materialTagsPost: string = null;
+
+  materialNameGet: string = null;
+  materialDescriptionGet: string = null;
+  materialTagsGet: string = null;
+
+
   @Output() onReviewRequest = new EventEmitter<ReviewRequest>();
+  @Output() onMaterialRequest = new EventEmitter<MaterialRequest>();
 
   constructor(
     private injector: Injector
@@ -62,34 +74,65 @@ export class AddComponent implements OnInit {
       });
   }
 
+  postMaterial() {
+    const url: string = API.postMaterialUrl;
+
+    console.log(url);
+
+    this.client.post(url, this.mapMaterial()).subscribe(
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   mapReview(): Review {
     let review: Review = new Review();
 
     if (this.userAgePost != null)
       review.user.age = this.userAgePost;
 
-    if(this.userGenderPost != null)
+    if (this.userGenderPost != null)
       review.user.gender = this.userGenderPost;
 
-    if(this.userNamePost != null)
+    if (this.userNamePost != null)
       review.user.name = this.userNamePost;
 
-    if(this.userMiddleNamePost != null)
+    if (this.userMiddleNamePost != null)
       review.user.middleName = this.userMiddleNamePost;
 
-    if(this.userLastNamePost != null)
+    if (this.userLastNamePost != null)
       review.user.lastName = this.userLastNamePost;
 
-    if(this.reviewContentPost != null)
+    if (this.reviewContentPost != null)
       review.content.content = this.reviewContentPost;
 
-    if(this.reviewTagsPost != null)
+    if (this.reviewTagsPost != null)
       review.tags.tags = this.parseTags(this.reviewTagsPost);
 
-    if(this.reviewDatePost != null)
+    if (this.reviewDatePost != null)
       review.reviewDate = this.parseDateToPost(this.reviewDatePost.toString());
 
     return review;
+  }
+
+  mapMaterial(): Material {
+    let material: Material = new Material();
+
+    if (this.materialNamePost != null) {
+      material.name = this.materialNamePost;
+    }
+    if (this.materialDescriptionPost != null) {
+      material.description = this.materialDescriptionPost;
+    }
+    if (this.materialContentPost != null) {
+      material.content.content = this.materialContentPost;
+    }
+    if (this.materialTagsPost != null) {
+      material.tags.tags = this.parseTags(this.materialTagsPost);
+    }
+
+    return material
   }
 
   getAllReviews() {
@@ -97,7 +140,12 @@ export class AddComponent implements OnInit {
     this.onReviewRequest.emit(request);
   }
 
-  sendRequest() {
+  getAllMaterials() {
+    const request = new MaterialRequest(true)
+    this.onMaterialRequest.emit(request);
+  }
+
+  sendReviewRequest() {
     const request = new ReviewRequest(false);
 
     request.gender = this.genderGET;
@@ -114,10 +162,26 @@ export class AddComponent implements OnInit {
     if (this.toDateGET != null)
       request.toDate = this.parseDate(this.toDateGET.toString());
 
-    if (this.tagsGET != null)
-      request.tags = this.parseTags(this.tagsGET);
+    if (this.reviewTagsGET != null)
+      request.tags = this.parseTags(this.reviewTagsGET);
 
     this.onReviewRequest.emit(request);
+  }
+
+  sendMaterialRequest() {
+    const request = new MaterialRequest(false);
+
+    if (this.materialNameGet != null) {
+      request.name = this.materialNameGet;
+    }
+    if (this.materialDescriptionGet != null) {
+      request.description = this.materialDescriptionGet;
+    }
+    if (this.materialTagsGet != null) {
+      request.tags = this.parseTags(this.materialTagsGet)
+    }
+
+    this.onMaterialRequest.emit(request);
   }
 
   initDateMapping() {

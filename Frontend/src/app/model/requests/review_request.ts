@@ -1,3 +1,5 @@
+import {API} from "../../const/api-url";
+
 export class ReviewRequest implements GetRequest {
 
   gender: string = null;
@@ -17,23 +19,23 @@ export class ReviewRequest implements GetRequest {
   }
 
   createQuery(): string {
-    let res: string = '/get/reviews?'
-            + 'fromAge' + '=' + this.fromAge
+    let res: string = API.getReviewsUrl + '?'
+      + 'fromAge' + '=' + this.fromAge
       + '&' + 'toAge' + '=' + this.toAge;
 
-    if(this.gender != null)
+    if (this.gender != null)
       res += '&' + 'gender' + '=' + this.gender;
 
-    if(this.fromDate != null)
+    if (this.fromDate != null)
       res += '&' + 'fromDate' + '=' + this.fromDate;
 
-    if(this.toDate != null)
-      res += '&' + 'fromDate' + '=' + this.toDate;
+    if (this.toDate != null)
+      res += '&' + 'toDate' + '=' + this.toDate;
 
-    if(this.tags != null)
+    if (this.tags != null)
       res += '&' + 'tags' + '=' + this.tags;
 
-    if(this.getAll)
+    if (this.getAll)
       res += '&' + 'getAll' + '=' + this.getAll;
 
     return res;
