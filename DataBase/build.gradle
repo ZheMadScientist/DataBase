@@ -16,6 +16,7 @@ apply plugin: 'application'
 
 mainClassName = 'database.Main'
 
+
 distributions {
     main {
         contents {
@@ -68,9 +69,14 @@ jar {
     baseName = 'database'
     version = '0.1.1'
 
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    //from {
+      //  configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    //}
+    from('Frontend/dist/Frontend') {
+        into 'public'
     }
-    
+
 }
+
+//processResources.dependsOn('Frontend:build')
 

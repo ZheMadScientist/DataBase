@@ -1,0 +1,15 @@
+.review-card {
+  margin-top: 2%;
+}
+
+.review-card-inner {
+  margin-top: 2%;
+  background: #FAFAFA;
+}
+
+.review-card-date {
+  margin-top: 2%;
+  margin-left: auto;
+  max-width: 100px;
+  background: #FAFAFA;
+}
