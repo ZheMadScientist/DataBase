@@ -5,6 +5,7 @@ import {HttpService} from '../http-service/http.service';
 import {HttpClient} from '@angular/common/http';
 import {Material} from "../model/data/material";
 import {MaterialRequest} from "../model/requests/material_request";
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-main',
@@ -38,7 +39,7 @@ export class MainComponent implements OnInit {
     console.log(url);
 
     this.client.get(url).subscribe(r => {
-        this.reviews = r;
+      this.reviews = r;
         console.log(r);
       },
       error => {

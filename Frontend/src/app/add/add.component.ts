@@ -52,6 +52,7 @@ export class AddComponent implements OnInit {
 
   @Output() onReviewRequest = new EventEmitter<ReviewRequest>();
   @Output() onMaterialRequest = new EventEmitter<MaterialRequest>();
+  material: boolean;
 
   constructor(
     private injector: Injector
@@ -215,7 +216,7 @@ export class AddComponent implements OnInit {
   }
 
   //such wow
-  parseDateToPost(date: string) {
+  parseDateToPost(date: string): string {
     let parsed: string = this.parseDate(date);
 
     let res: string;

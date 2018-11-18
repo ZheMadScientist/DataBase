@@ -2,9 +2,9 @@
 
   <h1>Review</h1>
 
-  <mat-card class="review-card-user">
+  <mat-card class="review-card-inner">
 
-    <h2>User</h2>
+    <h3>User</h3>
 
     <p class="review-card-user-text">
       {{review.user.name}} {{review.user.lastName}} {{review.user.middleName}}
@@ -20,19 +20,19 @@
 
   </mat-card>
 
-  <mat-card class="review-card-content">
+  <mat-card class="review-card-inner">
 
-    <h2>Content</h2>
+    <h3>Content</h3>
 
-    <p class="review-card-content-text">
+    <p class="review-card-inner-text">
       {{review.content.content}}
     </p>
 
   </mat-card>
 
-  <mat-card class="review-card-tags">
+  <mat-card class="review-card-inner">
 
-    <h2>Tags</h2>
+    <h3>Tags</h3>
 
     <p class="review-card-tags-text">
       {{review.tags.tags}}
@@ -45,7 +45,7 @@
     <h3>Date</h3>
 
     <p class="review-card-date-text">
-      {{review.reviewDate}}
+      {{parseDateToView()}}
     </p>
 
   </mat-card>
