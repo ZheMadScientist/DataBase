@@ -45,7 +45,7 @@ public class GetController {
 
     private VController versionController = new VController();
 
-    private LocalDate minDate = LocalDate.of(1973, 1,1);
+    private LocalDate minDate = LocalDate.of(1700, 1,1);
 
     private LocalDate maxDate = LocalDate.of(3000, 1,1);
 
