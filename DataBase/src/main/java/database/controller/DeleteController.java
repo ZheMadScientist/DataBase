@@ -1,11 +1,7 @@
 package database.controller;
 
-import database.model.course.Course;
-import database.model.stat.log.CourseLog;
-import database.model.stat.log.UserLog;
 import database.model.storage.Content;
 import database.model.storage.Material;
-import database.model.storage.Task;
 import database.model.user.User;
 import database.versioning.VController;
 import org.springframework.http.HttpStatus;
@@ -38,23 +34,6 @@ public class DeleteController {
         Material instance = em.find(Material.class, id);
 
         if(instance != null) {
-            em.remove(instance);
-
-            if(delete_all_versions)
-                versionController.deleteDumps(id, em);
-        }
-
-        em.flush();
-    }
-
-    @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(value = "/task", method = RequestMethod.DELETE)
-    public void task (@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                      @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
-
-        Task instance = em.find(Task.class, id);
-
-        if(instance != null){
             em.remove(instance);
 
             if(delete_all_versions)
@@ -98,57 +77,4 @@ public class DeleteController {
         em.flush();
     }
 
-    @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(value = "/userLog", method = RequestMethod.DELETE)
-    public void userLog(@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                        @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
-
-        UserLog instance = em.find(UserLog.class, id);
-        
-        if (instance != null){
-            em.remove(instance);
-
-            if(delete_all_versions)
-                versionController.deleteDumps(id, em);
-        }
-        
-        em.flush();
-    }
-
-    @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(value = "/course", method = RequestMethod.DELETE)
-    public void course(@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                       @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
-
-        Course instance = em.find(Course.class, id);
-        
-        if (instance != null){
-            em.remove(instance);
-
-            if(delete_all_versions)
-                versionController.deleteDumps(id, em);
-        }
-
-        em.flush();
-    }
-
-    @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(value = "/courseLog", method = RequestMethod.DELETE)
-    public void courseLog(@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                          @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
-
-        CourseLog instance = em.find(CourseLog.class, id);
-        
-        if (instance != null){
-            em.remove(instance);
-
-            if(delete_all_versions)
-                versionController.deleteDumps(id, em);
-        }
-
-        em.flush();
-    }
-
-
-    
 }

@@ -3,7 +3,6 @@ package database.controller;
 
 import database.model.storage.Material;
 import database.model.storage.Review;
-import database.model.tagging.Tags;
 import database.model.user.User;
 import database.repos.MaterialRepo;
 import database.repos.ReviewRepo;
@@ -19,8 +18,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
