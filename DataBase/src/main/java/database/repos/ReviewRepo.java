@@ -7,15 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface ReviewRepo extends JpaRepository<Review, Long> {
 
-    List<Review> getReviewsByUserAndReviewDateBetweenAndTags_tagsContaining(User user, LocalDate fromDate, LocalDate toDate, List<String> tags);
+    Set<Review> getReviewsByUserAndReviewDateBetweenAndTags_tagsIn(User user, LocalDate fromDate, LocalDate toDate, List<String> tags);
 
     List<Review> getReviewsByUserAndReviewDateBetween(User user, LocalDate fromDate, LocalDate toDate);
 
-    List<Review> getReviewsByTags_tagsContaining(List<String> tags);
+    Set<Review> getReviewsByTags_tagsIn(List<String> tags);
 
     List<Review> getReviewsByReviewDateBetween(LocalDate from, LocalDate to);
 }

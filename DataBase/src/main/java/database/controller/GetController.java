@@ -71,19 +71,19 @@ public class GetController {
         List<Material> res;
 
         if(name != null && description != null && tags != null)
-            res = materialRepo.getMaterialsByNameAndDescriptionAndTags_tagsContaining(name, description, tags);
+            res = new ArrayList<>(materialRepo.getMaterialsByNameAndDescriptionAndTags_tagsIn(name, description, tags));
 
         else if(name != null && description != null)
             res = materialRepo.getMaterialsByNameAndDescription(name, description);
 
         else if(name != null && tags != null)
-            res = materialRepo.getMaterialsByNameAndTags_tagsContaining(name, tags);
+            res = new ArrayList<>(materialRepo.getMaterialsByNameAndTags_tagsIn(name, tags));
 
         else if(description != null && tags != null)
-            res = materialRepo.getMaterialsByDescriptionAndTags_tagsContaining(description, tags);
+            res = new ArrayList<>(materialRepo.getMaterialsByDescriptionAndTags_tagsIn(description, tags));
 
         else if(tags != null)
-            res = materialRepo.getMaterialsByTags_tagsContaining(tags);
+            res = new ArrayList<>(materialRepo.getMaterialsByTags_tagsIn(tags));
 
         else if(name != null)
             res = materialRepo.getMaterialsByName(name);
@@ -168,7 +168,7 @@ public class GetController {
             return reviewRepo.getReviewsByReviewDateBetween(fromDate, toDate);
 
         if(tags != null && gender == null && fromAge == -1 && toAge == -1)
-            return reviewRepo.getReviewsByTags_tagsContaining(tags);
+            return new ArrayList<>(reviewRepo.getReviewsByTags_tagsIn(tags));
 
         if(toAge == -1)
             toAge = Integer.MAX_VALUE;
@@ -181,7 +181,7 @@ public class GetController {
 
         if(tags != null) {
             for (User u : users)
-                res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTags_tagsContaining(u, fromDate, toDate, tags));
+                res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetweenAndTags_tagsIn(u, fromDate, toDate, tags));
         } else {
             for (User u : users)
                 res.addAll(reviewRepo.getReviewsByUserAndReviewDateBetween(u, fromDate, toDate));
