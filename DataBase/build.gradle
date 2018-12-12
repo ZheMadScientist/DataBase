@@ -67,7 +67,7 @@ jar {
         attributes 'Main-Class' : 'database.Main'
     }
     baseName = 'database'
-    version = '0.1.1'
+    version = '0.1.2'
 
     //from {
       //  configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
