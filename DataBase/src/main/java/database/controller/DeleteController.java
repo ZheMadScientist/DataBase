@@ -2,6 +2,7 @@ package database.controller;
 
 import database.model.storage.Content;
 import database.model.storage.Material;
+import database.model.storage.Review;
 import database.model.user.User;
 import database.versioning.VController;
 import org.springframework.http.HttpStatus;
@@ -29,11 +30,33 @@ public class DeleteController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/material", method = RequestMethod.DELETE)
     public void material (@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                          @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
+                          @RequestParam(value="delete_all_versions", required = false, defaultValue = "true") boolean delete_all_versions) {
 
         Material instance = em.find(Material.class, id);
 
         if(instance != null) {
+            em.remove(instance.content);
+            em.remove(instance.tags);
+            em.remove(instance);
+
+            if(delete_all_versions)
+                versionController.deleteDumps(id, em);
+        }
+
+        em.flush();
+    }
+
+    @ResponseStatus(value = HttpStatus.OK)
+    @RequestMapping(value = "/review", method = RequestMethod.DELETE)
+    public void review (@RequestParam(value="id", required = true, defaultValue = "0") long id,
+                        @RequestParam(value="delete_all_versions", required = false, defaultValue = "true") boolean delete_all_versions) {
+
+        Review instance = em.find(Review.class, id);
+
+        if(instance != null) {
+            em.remove(instance.user);
+            em.remove(instance.content);
+            em.remove(instance.tags);
             em.remove(instance);
 
             if(delete_all_versions)
@@ -46,7 +69,7 @@ public class DeleteController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/content", method = RequestMethod.DELETE)
     public void content (@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                      @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
+                      @RequestParam(value="delete_all_versions", required = false, defaultValue = "true") boolean delete_all_versions) {
 
         Content instance = em.find(Content.class, id);
 
@@ -63,7 +86,7 @@ public class DeleteController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(value = "/user", method = RequestMethod.DELETE)
     public void user (@RequestParam(value="id", required = true, defaultValue = "0") long id,
-                      @RequestParam(value="delete_all_versions", required = false, defaultValue = "false") boolean delete_all_versions) {
+                      @RequestParam(value="delete_all_versions", required = false, defaultValue = "true") boolean delete_all_versions) {
 
         User instance = em.find(User.class, id);
 
