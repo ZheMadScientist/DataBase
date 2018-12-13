@@ -13,14 +13,13 @@ import java.util.logging.Logger;
 public class DBProvider {
     Connection c;
 
-    String url;
 
     private Logger log;
 
     private void connect(boolean isAutoCommit) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         c = DriverManager
-                .getConnection(url,
+                .getConnection(DBConstants.URL,
                         DBConstants.USERNAME,
                         DBConstants.PASSWORD);
         if(!isAutoCommit)
@@ -29,9 +28,8 @@ public class DBProvider {
         log.log(Level.INFO, "Successfully connected to database ");
     }
 
-    public DBProvider(String url) {
+    public DBProvider() {
         log = Logger.getLogger(DBProvider.class.getName());
-        this.url = url;
     }
 
     public List<String> getAllTables () {
