@@ -20,8 +20,8 @@ public class VersioningUtils {
     public static TokensWrapper getTokensWrapper(String firstJSON, String secondJSON) {
         TokensWrapper tokensWrapper = new TokensWrapper();
 
-        String[] firstParts = firstJSON.split(";");
-        String[] secondParts = secondJSON.split(";");
+        String[] firstParts = firstJSON.split(",");
+        String[] secondParts = secondJSON.split(",");
 
         boolean isFirstLonger = firstParts.length > secondParts.length;
         int lastIndex = isFirstLonger ? secondParts.length : firstParts.length;
@@ -59,9 +59,11 @@ public class VersioningUtils {
         if(latestJSON.length != partsSize.size())
             return res;
 
-        for(int i = 0; i < partsSize.size(); ++i){
+        for(int i = 0; i < partsSize.size(); ++i) {
             res = res.concat(recover(wrapper.getNext(partsSize.get(i)), latestJSON[i]));
-            res = res.concat(recover(wrapper.getNext(partsSize.get(i)), latestJSON[i]));
+
+            if(i != partsSize.size() - 1)
+                res = res.concat(",");
         }
 
         return res;

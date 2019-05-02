@@ -1,6 +1,5 @@
 package database.model.storage.AIDS;
 
-import database.constants.DBConstants;
 import database.utils.DBProvider;
 
 import java.util.Set;
@@ -22,7 +21,7 @@ public class GuidStorage {
 
 
     GuidStorage(){
-        guids = new DBProvider(DBConstants.URL).getAllId();
+        guids = new DBProvider().getAllId();
     }
 
     /**

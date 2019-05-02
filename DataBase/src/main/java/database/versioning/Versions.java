@@ -4,6 +4,9 @@ import database.model.Entity;
 import database.versioning.model.TokensWrapper;
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 /**
  * Класс для хранения версий объектов
@@ -33,18 +36,26 @@ public class Versions extends Entity {
     public String version;
 
     /**
+     * Описание версии сохраняемого объекта
+     */
+    @NonNull
+    public String versionDescription;
+
+    /**
      * Дата создания сохраняемого объекта
      */
     @NonNull
-    public String date;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    public LocalDate date;
 
     public Versions (){}
 
-    public Versions(long guid, TokensWrapper tokensWrapper, String version, String date){
+    public Versions(long guid, TokensWrapper tokensWrapper, String version, String versionDescription, LocalDate date){
         this.entity_id = guid;
         this.date = date;
         this.tokensWrapper = tokensWrapper;
         this.version = version;
+        this.versionDescription = versionDescription;
     }
 
 }

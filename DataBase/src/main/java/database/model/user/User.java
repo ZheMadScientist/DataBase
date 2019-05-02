@@ -1,19 +1,18 @@
 package database.model.user;
 
-import database.model.course.CourseState;
-import database.model.stat.log.UserLog;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 /**
  * Класс, описывающий пользователя
  */
 @Data
 @Entity
-@Table(name = "users", indexes = { @Index( name = "user_index",  columnList="name,middleName,lastName", unique = true ) })
+@Table(name = "users")
 public class User extends database.model.Entity {
     @Basic
     public String name;
@@ -24,30 +23,25 @@ public class User extends database.model.Entity {
     @Basic
     public String lastName;
 
-    /**
-     * Объект, хранящий активность (логи) пользователя
-     */
-    @OneToOne
-    public UserLog userLog = new UserLog();
+    public Integer age;
 
     /**
-     * Список курсов, в которых учавствует пользователь
+     * default vals: <br>male - m
+     * <br>female - f
      */
-    @OneToMany(mappedBy = "students")
-    public List<CourseState> user_courses = new ArrayList<>();
+    public String gender;
 
-    /**
-     * Объект, хранящий права доступа пользователя к другим сущностям бд
-     * @see Access
-     */
-    @ManyToOne
-    public Access access;
+    public boolean isValid() {
+        return name != null || middleName != null || lastName != null || age != null;
+    }
 
     public User(){ }
 
     public User(User other){
-        name = other.name;
-        middleName = other.middleName;
-        lastName = other.lastName;
+        this.name = other.name;
+        this.middleName = other.middleName;
+        this.lastName = other.lastName;
+        this.age = other.age;
+        this.gender = other.gender;
     }
 }

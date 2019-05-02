@@ -1,6 +1,7 @@
 package database.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
@@ -23,7 +24,8 @@ public class Version {
     /**
      * Дата создания объекта
      */
-    public String date;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    public LocalDate date;
 
     public Version(){
         version = "1";
@@ -38,6 +40,6 @@ public class Version {
     }
 
     private void setDate(){
-        date = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
+        date = LocalDate.now();
     }
 }

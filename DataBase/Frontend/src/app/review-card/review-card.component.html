@@ -1,0 +1,53 @@
+<mat-card class="review-card" style="max-width: 800px">
+
+  <h1>Review</h1>
+
+  <mat-card class="review-card-inner">
+
+    <h3>User</h3>
+
+    <p class="review-card-user-text">
+      {{review.user.name}} {{review.user.lastName}} {{review.user.middleName}}
+    </p>
+
+    <p class="review-card-user-text">
+      Gender: {{review.user.gender}}
+    </p>
+
+    <p *ngIf="review.user.age != -1">
+      Age: {{review.user.age}}
+    </p>
+
+  </mat-card>
+
+  <mat-card class="review-card-inner">
+
+    <h3>Content</h3>
+
+    <p class="review-card-inner-text">
+      {{review.content.content}}
+    </p>
+
+  </mat-card>
+
+  <mat-card class="review-card-inner">
+
+    <h3>Tags</h3>
+
+    <p class="review-card-tags-text">
+      {{review.tags.tags}}
+    </p>
+
+  </mat-card>
+
+  <mat-card class="review-card-date">
+
+    <h3>Date</h3>
+
+    <p class="review-card-date-text">
+      {{parseDateToView()}}
+    </p>
+
+  </mat-card>
+
+</mat-card>

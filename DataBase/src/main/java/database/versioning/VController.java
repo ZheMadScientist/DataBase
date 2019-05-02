@@ -39,7 +39,7 @@ public class VController {
      */
     public <T extends Entity> void createDump (T newInstance, T old, Class<T> c, EntityManager em){
 
-        if(!GuidStorage.getInstance().contains(newInstance.GUID) || old == null)
+        if(newInstance == null || old == null)
             return;
 
         Serializer serializer = new SerializerFactory().getSerializer(Entity.class);
@@ -49,7 +49,7 @@ public class VController {
 
         TokensWrapper tokensWrapper = VersioningUtils.getTokensWrapper(newJSON, oldJSON);
 
-        Versions dump = new Versions(old.GUID, tokensWrapper, old.version, old.date);
+        Versions dump = new Versions(old.GUID, tokensWrapper, old.version, old.versionDescription, old.date);
 
         em.persist(dump);
         em.flush();
@@ -75,7 +75,7 @@ public class VController {
         int depth = 0;
         for(int i = 0; i < versions.size(); ++i){
             if(versions.get(i).version.equals(version)){
-                depth = i;
+                depth = i + 1;
                 break;
             }
         }

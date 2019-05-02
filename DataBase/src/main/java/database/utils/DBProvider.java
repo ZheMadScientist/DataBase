@@ -13,14 +13,13 @@ import java.util.logging.Logger;
 public class DBProvider {
     Connection c;
 
-    String url;
 
     private Logger log;
 
     private void connect(boolean isAutoCommit) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         c = DriverManager
-                .getConnection(url,
+                .getConnection(DBConstants.URL,
                         DBConstants.USERNAME,
                         DBConstants.PASSWORD);
         if(!isAutoCommit)
@@ -29,9 +28,8 @@ public class DBProvider {
         log.log(Level.INFO, "Successfully connected to database ");
     }
 
-    public DBProvider(String url) {
+    public DBProvider() {
         log = Logger.getLogger(DBProvider.class.getName());
-        this.url = url;
     }
 
     public List<String> getAllTables () {
@@ -88,10 +86,15 @@ public class DBProvider {
                 if(!(tmp.contains("databasechangelog") || tmp.contains("hibernate") || Arrays.asList(DBConstants.NON_ENTITY_EXTENDED_ELEMENTS).contains(tmp))){
                     String query = "SELECT * FROM " + tmp + ";";
 
+                    String guidName = "guid";
+
+                    if(DBConstants.ELEMENT_COLLECTION_ELEMENTS.containsKey(tmp))
+                        guidName = DBConstants.ELEMENT_COLLECTION_ELEMENTS.get(tmp);
+
                     ResultSet rs = s.executeQuery(query);
 
                     while ( rs.next() ) {
-                        long guid = rs.getLong("guid");
+                        long guid = rs.getLong(guidName);
                         selected.add(guid);
                     }
                     rs.close();

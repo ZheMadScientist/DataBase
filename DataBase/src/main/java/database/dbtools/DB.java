@@ -10,7 +10,7 @@ public class DB {
         if(args.length == 1)
             DBConstants.URL = args[0];
         
-        DBProvider provider = new DBProvider(DBConstants.URL);
+        DBProvider provider = new DBProvider();
 
         Iterator it = provider.getAllTables().iterator();
         while (it.hasNext()) {

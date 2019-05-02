@@ -12,7 +12,9 @@ database.model.stat.log
 database.model.step
 database.model.storage
 database.model.storage.AIDS
+database.model.tagging
 database.model.user
+database.repos
 database.utils
 database.versioning
 database.versioning.model
